@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yuki Noda | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- Grain texture overlay -->
+    <div class="grain"></div>
+
+    <!-- Page Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-inner">
+            <div class="loader-count" id="loaderCount">000</div>
+            <div class="loader-bar">
+                <div class="loader-bar-fill" id="loaderBarFill"></div>
+            </div>
+            <div class="loader-label">Loading Portfolio</div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="logo">
+            <span class="logo-dot"></span>
+            YUKI NODA
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#works">WORKS</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+        <div class="header-status">
+            <span>Available for projects</span>
+            <span class="status-pulse"></span>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div id="leaf-container"></div>
+        <div class="hero-side-text">SHIZUOKA — 2026 — PORTFOLIO</div>
+
+        <svg class="hero-bg-svg" id="heroBgSvg" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="400" cy="400" r="350" fill="none" stroke="rgba(184,240,92,0.04)" stroke-width="1" />
+            <circle cx="400" cy="400" r="270" fill="none" stroke="rgba(184,240,92,0.06)" stroke-width="0.5" />
+            <circle cx="400" cy="400" r="180" fill="none" stroke="rgba(184,240,92,0.08)" stroke-width="0.5" />
+            <circle cx="400" cy="400" r="90" fill="none" stroke="rgba(184,240,92,0.1)" stroke-width="0.5" />
+            <line x1="400" y1="50" x2="400" y2="750" stroke="rgba(184,240,92,0.03)" stroke-width="0.5" />
+            <line x1="50" y1="400" x2="750" y2="400" stroke="rgba(184,240,92,0.03)" stroke-width="0.5" />
+            <line x1="153" y1="153" x2="647" y2="647" stroke="rgba(184,240,92,0.03)" stroke-width="0.5" />
+            <line x1="647" y1="153" x2="153" y2="647" stroke="rgba(184,240,92,0.03)" stroke-width="0.5" />
+        </svg>
+
+        <div class="hero-content">
+            <div class="hero-label">
+                <span class="status-dot"></span>
+                静岡大学 工学部 機械工学科 / しずおかコネクト 代表
+            </div>
+
+            <h1 class="hero-title">
+                <div class="line-wrap"><span class="line" data-delay="0">CREATING</span></div>
+                <div class="line-wrap"><span class="line italic" data-delay="1">REAL</span></div>
+                <div class="line-wrap"><span class="line" data-delay="2">VALUE.</span></div>
+            </h1>
+
+            <div class="hero-footer">
+                <div class="hero-name">
+                    <span class="hero-name-jp">野田 悠生</span>
+                    <span class="hero-name-en">Yuki Noda</span>
+                </div>
+                <a href="#works" class="btn-hero">
+                    <span>DISCOVER</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Profile Flip Card -->
+        <div class="profile-flip-card" id="profileFlipCard" title="クリックで切り替え">
+            <div class="profile-flip-inner">
+                <!-- 表面：公式写真 -->
+                <div class="profile-flip-front">
+                    <div class="profile-circle-photo">
+                        <img src="photo-formal.jpg" alt="野田 悠生">
+                    </div>
+                    <div class="profile-flip-hint">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="currentColor"/></svg>
+                        PRESS
+                    </div>
+                </div>
+                <!-- 裏面：イラストデザイン -->
+                <div class="profile-flip-back">
+                    <div class="profile-illus-circle">
+                        <img src="photo-avatar.jpg" alt="Yuki illustration">
+                    </div>
+                    <div class="profile-back-roles">
+                        <span>静岡大学 機械工学科</span>
+                        <span class="back-sep">—</span>
+                        <span>しずおかコネクト</span>
+                    </div>
+                    <div class="profile-back-deco-bottom">SHIZUOKA · 2026</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            <span>SCROLL</span>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="stats-section">
+        <div class="stats-inner">
+            <div class="stat-item">
+                <div class="stat-num-wrap">
+                    <span class="stat-num" data-target="3">0</span>
+                </div>
+                <span class="stat-label">Years of Experience</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-num-wrap">
+                    <span class="stat-num" data-target="20">0</span><span class="stat-plus">+</span>
+                </div>
+                <span class="stat-label">Events Organized</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-num-wrap">
+                    <span class="stat-num" data-target="100">0</span><span class="stat-plus">+</span>
+                </div>
+                <span class="stat-label">Students Connected</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- About -->
+    <section id="about" class="about-section">
+        <div class="about-label">00 — ABOUT</div>
+
+        <div class="about-grid">
+            <!-- Left: text -->
+            <div class="about-text-col">
+                <h2 class="about-title reveal-item">
+                    静岡から、<br><em>未来をつくる。</em>
+                </h2>
+                <div class="about-bio reveal-item" style="transition-delay:0.12s">
+                    <p>静岡大学工学部機械工学科で学びながら、自ら立ち上げた「しずおかコネクト」の代表として地域と学生をつなぐ活動を続けています。</p>
+                    <p>エンジニアリングの論理的思考とコミュニティデザインを組み合わせ、人と技術が共鳴する場をつくることに情熱を注いでいます。</p>
+                </div>
+                <div class="about-tags reveal-item" style="transition-delay:0.22s">
+                    <span class="about-tag">静岡大学</span>
+                    <span class="about-tag">機械工学科</span>
+                    <span class="about-tag">しずおかコネクト</span>
+                    <span class="about-tag">Web Dev</span>
+                    <span class="about-tag">Firebase</span>
+                    <span class="about-tag">制御工学</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Works -->
+    <section id="works" class="works-section">
+        <div class="works-header">
+            <div class="section-label">01 — PROJECTS & VENTURES</div>
+            <h2 class="section-title reveal-item">活動領域</h2>
+            <p class="section-desc reveal-item" style="transition-delay:0.1s">学生・地域・宇宙をつなぐ4つのフロント</p>
+        </div>
+
+        <div class="cards-grid">
+            <!-- Card 1: しずおかコネクト (large, spans 2 rows) -->
+            <div class="card card--large reveal-item" style="transition-delay:0s; grid-row: span 2;">
+                <div class="card-num">01</div>
+                <div class="card-image-wrap card-image-wrap--tall">
+                    <img src="img connect.png" alt="しずおかコネクト" class="card-img" />
+                </div>
+                <div class="card-body">
+                    <span class="card-tag">Organization</span>
+                    <h3>しずおかコネクト</h3>
+                    <p>学生と地域企業をつなぐプラットフォームを自ら立ち上げ、代表として運営。金融セミナー・インターンシップ・地域課題解決プロジェクトを多数企画・実行。地域の未来を学生の手でつくる拠点として成長中。</p>
+                    <a href="https://shizuoka-connect.com/" target="_blank" rel="noopener" class="card-link-btn">
+                        <span>WEBSITE</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 2: Web・アプリ開発 -->
+            <div class="card reveal-item" style="transition-delay:0.15s">
+                <div class="card-num">02</div>
+                <div class="card-image-wrap">
+                    <img src="img software.png" alt="Web・アプリ開発" class="card-img" />
+                </div>
+                <div class="card-body">
+                    <span class="card-tag">Web / App Development</span>
+                    <h3>Web・アプリ開発</h3>
+                    <p>クライアントの要望に応じたカスタマイズ制作。HTML / CSS / JavaScript・Firebaseを活用し、課題解決のためのシステムを設計・実装。</p>
+                    <div class="webdev-stats">
+                        <div class="webdev-stat">
+                            <span class="webdev-stat-num">20<span class="webdev-stat-unit">件</span></span>
+                            <span class="webdev-stat-label">Webページ 制作実績</span>
+                        </div>
+                        <div class="webdev-stat-divider"></div>
+                        <div class="webdev-stat">
+                            <span class="webdev-stat-num">10<span class="webdev-stat-unit">件</span></span>
+                            <span class="webdev-stat-label">アプリ 開発実績</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: 宇宙事業 × UNIBASE -->
+            <div class="card card--space reveal-item" style="transition-delay:0.3s">
+                <div class="card-num">03</div>
+                <div class="card-image-wrap">
+                    <img src="img space.png" alt="宇宙事業" class="card-img" />
+                </div>
+                <div class="card-body">
+                    <span class="card-tag new-tag">NEW — Space Business × JOINX</span>
+                    <h3>宇宙事業 始動</h3>
+                    <p>JOINXと連携し宇宙事業に参入。2030年に8兆円規模が見込まれる国内宇宙市場を視野に、地方創生×宇宙技術の新領域を切り拓く。</p>
+
+                    <div class="unibase-block">
+                        <div class="unibase-block-header">
+                            <span class="unibase-block-label">VENTURE</span>
+                            <span class="unibase-block-name">UNIBASE</span>
+                        </div>
+                        <p class="unibase-block-desc">「開発から実証まで一気通貫」の研究開発型スタートアップ拠点。コワーキング・宿泊棟・LABO の3機能。種子島（横浜薬科大・JAXA連携）、名古屋（遠隔農業・防災）など全国で共創プロジェクト始動中。将来的に全国10拠点展開を計画。</p>
+                        <div class="unibase-block-stats">
+                            <div class="unibase-block-stat">
+                                <span>8兆円</span>
+                                <small>国内宇宙市場 2030年</small>
+                            </div>
+                            <div class="unibase-block-stat">
+                                <span>10拠点</span>
+                                <small>全国展開 目標</small>
+                            </div>
+                            <div class="unibase-block-stat">
+                                <span>産学官</span>
+                                <small>連携体制</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee-section">
+        <div class="marquee-track">
+            <span>SHIZUOKA CONNECT &nbsp;—&nbsp; SOFTWARE DEVELOPMENT &nbsp;—&nbsp; SPACE BUSINESS &nbsp;—&nbsp; UNIBASE &nbsp;—&nbsp; JOINX &nbsp;—&nbsp; 宇宙技術×地方創生 &nbsp;—&nbsp; FIREBASE &nbsp;—&nbsp; 産学官連携 &nbsp;—&nbsp; </span>
+            <span>SHIZUOKA CONNECT &nbsp;—&nbsp; SOFTWARE DEVELOPMENT &nbsp;—&nbsp; SPACE BUSINESS &nbsp;—&nbsp; UNIBASE &nbsp;—&nbsp; JOINX &nbsp;—&nbsp; 宇宙技術×地方創生 &nbsp;—&nbsp; FIREBASE &nbsp;—&nbsp; 産学官連携 &nbsp;—&nbsp; </span>
+        </div>
+    </div>
+
+    <!-- Contact -->
+    <section id="contact" class="contact-section">
+        <div class="contact-label">02 — CONTACT</div>
+        <div class="contact-content">
+            <h2 class="contact-title reveal-item">
+                LET'S<br><em>CONNECT.</em>
+            </h2>
+            <p class="contact-sub reveal-item" style="transition-delay:0.1s">プロジェクトのご相談・お問い合わせはこちらへ</p>
+
+            <div class="contact-emails reveal-item" style="transition-delay:0.2s">
+                <!-- Row 1: Organization -->
+                <div class="contact-email-row">
+                    <div class="contact-email-type">
+                        <span class="contact-email-tag">Organization</span>
+                        <span class="contact-email-desc">しずおかコネクト</span>
+                    </div>
+                    <a href="mailto:campustocommunityshizuoka@gmail.com" class="contact-email">
+                        campustocommunityshizuoka@gmail.com
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" class="contact-email-icon"><path d="M7 17L17 7M17 7H7M17 7v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    </a>
+                </div>
+                <div class="contact-email-divider"></div>
+                <!-- Row 2: Business -->
+                <div class="contact-email-row">
+                    <div class="contact-email-type">
+                        <span class="contact-email-tag">Business</span>
+                        <span class="contact-email-desc">仕事・個人のご依頼</span>
+                    </div>
+                    <a href="mailto:office.noda.yuki@gmail.com" class="contact-email">
+                        office.noda.yuki@gmail.com
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" class="contact-email-icon"><path d="M7 17L17 7M17 7H7M17 7v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    </a>
+                </div>
+                <div class="contact-email-divider"></div>
+                <!-- Row 3: Instagram -->
+                <div class="contact-email-row">
+                    <div class="contact-email-type">
+                        <span class="contact-email-tag">Instagram</span>
+                        <span class="contact-email-desc">仕事用 — 活動の記録</span>
+                    </div>
+                    <a href="https://www.instagram.com/noda.yu_ki" target="_blank" rel="noopener" class="contact-email contact-instagram">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="contact-ig-icon">
+                            <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+                            <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+                        </svg>
+                        @noda.yu_ki
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" class="contact-email-icon"><path d="M7 17L17 7M17 7H7M17 7v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <span class="footer-name">© 2026</span>
+            <span class="footer-copy">© 2026 — All rights reserved</span>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
