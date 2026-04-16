@@ -1965,3 +1965,518 @@ footer {
     letter-spacing: 1px;
     line-height: 1.4;
 }
+
+
+/* ============================================================
+   SPACE CARD — Stars, Rocket, Planet
+   ============================================================ */
+
+.card--space {
+    overflow: hidden;
+    position: relative;
+}
+
+.space-stars-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.space-star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: starTwinkle var(--twinkle-dur, 2s) ease-in-out infinite;
+    animation-delay: var(--twinkle-delay, 0s);
+    opacity: 0;
+}
+
+@keyframes starTwinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50%       { opacity: var(--star-opacity, 0.7); transform: scale(1); }
+}
+
+.space-planet {
+    position: absolute;
+    bottom: 80px;
+    right: 32px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 38%,
+        rgba(184,240,92,0.7) 0%,
+        rgba(184,240,92,0.3) 40%,
+        rgba(80,130,20,0.2) 100%
+    );
+    box-shadow:
+        0 0 20px rgba(184,240,92,0.4),
+        inset -5px -5px 10px rgba(0,0,0,0.5);
+    pointer-events: none;
+    z-index: 3;
+    animation: planetBob 6s ease-in-out infinite;
+}
+
+.space-planet::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -14px;
+    right: -14px;
+    height: 6px;
+    background: transparent;
+    border-radius: 50%;
+    border: 1px solid rgba(184,240,92,0.3);
+    transform: translateY(-50%) rotateX(72deg);
+}
+
+@keyframes planetBob {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50%       { transform: translateY(-10px) rotate(5deg); }
+}
+
+.space-rocket-wrap {
+    position: absolute;
+    bottom: -80px;
+    left: -60px;
+    width: 50px;
+    height: 70px;
+    pointer-events: none;
+    z-index: 4;
+    opacity: 0;
+}
+
+.space-rocket-wrap.launch {
+    animation: rocketFly 3.4s cubic-bezier(0.2, 0, 0.75, 1) forwards;
+}
+
+@keyframes rocketFly {
+    0%   { opacity: 0;  bottom: -80px; left: -60px;  transform: rotate(-45deg) scale(0.5); }
+    6%   { opacity: 1;  bottom: 0px;   left: 0px;    transform: rotate(-45deg) scale(0.8); }
+    80%  { opacity: 1;  bottom: 110%;  left: 110%;   transform: rotate(-45deg) scale(1.1); }
+    100% { opacity: 0;  bottom: 130%;  left: 130%;   transform: rotate(-45deg) scale(0.7); }
+}
+
+.space-rocket-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 10px rgba(184,240,92,0.7));
+}
+
+.rocket-flame {
+    animation: flameFlicker 0.1s ease-in-out infinite alternate;
+    transform-origin: 20px 38px;
+}
+
+@keyframes flameFlicker {
+    from { transform: scaleY(1)   scaleX(1);    opacity: 0.9; }
+    to   { transform: scaleY(1.4) scaleX(0.75); opacity: 1; }
+}
+
+@keyframes exhaustFade {
+    0%   { opacity: 1; transform: translate(0, 0) scale(1); }
+    100% { opacity: 0; transform: translate(var(--ex, -15px), var(--ey, -35px)) scale(0.1); }
+}
+
+.card--space.rocket-active {
+    box-shadow: 0 0 50px rgba(184,240,92,0.15), 0 0 100px rgba(184,240,92,0.05);
+}
+
+/* ============================================================
+   CARD 3D TILT — Glare Overlay
+   ============================================================ */
+
+.card-glare {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    border-radius: inherit;
+    background: radial-gradient(
+        circle at var(--gx, 50%) var(--gy, 50%),
+        rgba(255,255,255,0.13) 0%,
+        rgba(255,255,255,0.04) 35%,
+        transparent 65%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.card:hover .card-glare {
+    opacity: 1;
+}
+
+/* ============================================================
+   HERO — Shooting Stars
+   ============================================================ */
+
+.shooting-star {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg,
+        rgba(184,240,92,0) 0%,
+        rgba(184,240,92,0.9) 50%,
+        rgba(255,255,255,1) 100%
+    );
+    pointer-events: none;
+    z-index: 2;
+    border-radius: 999px;
+    opacity: 0;
+    animation: shootingStar var(--ss-dur, 1.2s) linear forwards;
+    transform-origin: left center;
+}
+
+@keyframes shootingStar {
+    0%   { opacity: 0; transform: rotate(var(--ss-angle,-20deg)) translateX(0)   scaleX(0.05); }
+    8%   { opacity: 1; }
+    80%  { opacity: 1; transform: rotate(var(--ss-angle,-20deg)) translateX(var(--ss-dist, 250px)) scaleX(1); }
+    100% { opacity: 0; transform: rotate(var(--ss-angle,-20deg)) translateX(calc(var(--ss-dist, 250px) + 60px)) scaleX(0.3); }
+}
+
+/* ============================================================
+   HERO — Mixed Particle System (Orbs + Sparkles)
+   ============================================================ */
+
+.particle-orb {
+    position: absolute;
+    top: -20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,240,92,0.95), rgba(184,240,92,0.08));
+    box-shadow: 0 0 10px rgba(184,240,92,0.5);
+    pointer-events: none;
+    filter: blur(0.5px);
+    animation: fall var(--fall-dur, 12s) linear var(--fall-delay, 0s) infinite,
+               orbPulse var(--pulse-dur, 2.5s) ease-in-out infinite alternate;
+}
+
+@keyframes orbPulse {
+    from { box-shadow: 0 0 5px rgba(184,240,92,0.3);  opacity: 0.35; }
+    to   { box-shadow: 0 0 20px rgba(184,240,92,0.9); opacity: 0.9; }
+}
+
+.particle-sparkle {
+    position: absolute;
+    top: -10px;
+    background: rgba(255,255,255,0.85);
+    pointer-events: none;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    animation: fall var(--fall-dur, 8s) linear var(--fall-delay, 0s) infinite,
+               sparkleSpin var(--spin-dur, 1s) linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes sparkleSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   HERO — Floating Rocket
+   ============================================================ */
+
+.hero-float-astronaut {
+    position: absolute;
+    font-size: 2.2rem;
+    top: 22%;
+    right: 12%;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0;
+    filter: drop-shadow(0 0 14px rgba(184,240,92,0.4));
+    animation: astronautBob 4s ease-in-out 2.8s infinite,
+               fadeInAstronaut 0.8s ease 2.6s forwards;
+}
+
+@keyframes astronautBob {
+    0%, 100% { transform: translateY(0px)   rotate(-8deg); }
+    50%       { transform: translateY(-24px) rotate(8deg);  }
+}
+
+@keyframes fadeInAstronaut {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   TYPEWRITER — Hero Label
+   ============================================================ */
+
+.hero-label-typewriter::after {
+    content: '|';
+    color: var(--accent);
+    animation: caretBlink 0.85s step-end infinite;
+    margin-left: 1px;
+    font-weight: 300;
+}
+
+@keyframes caretBlink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+}
+
+/* ============================================================
+   GLITCH EFFECT — Hero Title
+   ============================================================ */
+
+.hero-title.glitching .line {
+    position: relative;
+}
+
+.hero-title.glitching .line::before,
+.hero-title.glitching .line::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0;
+    pointer-events: none;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    line-height: inherit;
+    color: inherit;
+}
+
+.hero-title.glitching .line::before {
+    color: #ff4dff;
+    clip-path: polygon(0 20%, 100% 20%, 100% 45%, 0 45%);
+    animation: glitchShiftA 0.35s steps(2) forwards;
+}
+
+.hero-title.glitching .line::after {
+    color: #4dffff;
+    clip-path: polygon(0 55%, 100% 55%, 100% 78%, 0 78%);
+    animation: glitchShiftB 0.35s steps(2) forwards;
+}
+
+@keyframes glitchShiftA {
+    0%, 100% { transform: translateX(0);  opacity: 0; }
+    25%, 75%  { transform: translateX(-7px); opacity: 0.85; }
+    50%        { transform: translateX(4px);  opacity: 0.7; }
+}
+
+@keyframes glitchShiftB {
+    0%, 100% { transform: translateX(0); opacity: 0; }
+    30%, 70%  { transform: translateX(7px);  opacity: 0.85; }
+    55%        { transform: translateX(-4px); opacity: 0.7; }
+}
+
+/* ============================================================
+   SPLIT CHARACTER REVEAL — Section Headings
+   ============================================================ */
+
+.split-heading .split-char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(36px) rotate(5deg);
+    transition: opacity 0.55s ease,
+                transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(var(--ci, 0) * 0.04s + 0.05s);
+}
+
+.split-heading.split-revealed .split-char {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+}
+
+/* ============================================================
+   CURSOR TRAIL
+   ============================================================ */
+
+.cursor-trail-dot {
+    position: fixed;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(184,240,92,0.75);
+    pointer-events: none;
+    z-index: 9997;
+    transform: translate(-50%, -50%) scale(1);
+    transition: opacity 0.32s ease, transform 0.32s ease;
+    will-change: left, top, opacity;
+}
+
+/* ============================================================
+   STATS — Bounce + Particle Burst
+   ============================================================ */
+
+.stat-num {
+    display: inline-block;
+}
+
+.stat-num.bounce {
+    animation: counterBounce 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes counterBounce {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.22); }
+    100% { transform: scale(1); }
+}
+
+.stat-burst-particle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: burstFly var(--bd, 0.65s) ease-out forwards;
+}
+
+@keyframes burstFly {
+    0%   { opacity: 1; transform: translate(0, 0) scale(1.2); }
+    100% { opacity: 0; transform: translate(var(--bx, 20px), var(--by, -20px)) scale(0); }
+}
+
+/* ============================================================
+   ABOUT — Tag Float + Cascade Reveal
+   ============================================================ */
+
+.about-tag {
+    opacity: 0;
+    transform: translateY(14px) scale(0.94);
+    animation: tagFloat var(--tf-dur, 3s) ease-in-out var(--tf-delay, 0s) infinite;
+    animation-play-state: paused;
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.28s ease, color 0.28s ease, background 0.28s ease,
+                box-shadow 0.28s ease;
+}
+
+.about-tags.visible .about-tag {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    animation-play-state: running;
+}
+
+@keyframes tagFloat {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(var(--tf-lift, -5px)); }
+}
+
+.about-tag:hover {
+    transform: scale(1.12) translateY(-5px) !important;
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+    background: var(--accent-dim) !important;
+    box-shadow: 0 8px 24px rgba(184,240,92,0.18) !important;
+    animation-play-state: paused !important;
+}
+
+/* ============================================================
+   MARQUEE — Second Row (Reverse)
+   ============================================================ */
+
+.marquee-track--reverse {
+    animation: marqueeScrollReverse 30s linear infinite;
+    border-top: 1px solid var(--border);
+}
+
+@keyframes marqueeScrollReverse {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0); }
+}
+
+/* ============================================================
+   CONTACT — Animated Grid + Glitch Hover
+   ============================================================ */
+
+.contact-section {
+    position: relative;
+}
+
+.contact-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(184,240,92,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184,240,92,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+    animation: gridDrift 22s linear infinite;
+}
+
+@keyframes gridDrift {
+    from { background-position: 0 0; }
+    to   { background-position: 60px 60px; }
+}
+
+.contact-title:hover em {
+    animation: contactGlitch 0.4s steps(3) forwards;
+    display: inline-block;
+}
+
+@keyframes contactGlitch {
+    0%   { text-shadow: none; transform: none; }
+    20%  { text-shadow: -3px 0 #ff00ff, 3px 0 #00ffff; transform: translateX(-2px); }
+    40%  { text-shadow:  4px 0 #ff00ff, -4px 0 #00ffff; transform: translateX(2px); }
+    60%  { text-shadow: -2px 0 #ff00ff, 2px 0 #00ffff;  transform: translateX(-1px); }
+    80%  { text-shadow:  1px 0 #ff00ff, -1px 0 #00ffff; transform: none; }
+    100% { text-shadow: none; transform: none; }
+}
+
+/* ============================================================
+   SCANLINE REVEAL — Section Transitions
+   ============================================================ */
+
+.about-section::after,
+.works-section::after,
+.contact-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left center;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.about-section.scanline-active::after,
+.works-section.scanline-active::after,
+.contact-section.scanline-active::after {
+    animation: scanlineReveal 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes scanlineReveal {
+    0%   { transform: scaleX(0); opacity: 0.9; }
+    70%  { transform: scaleX(1); opacity: 0.9; }
+    100% { transform: scaleX(1); opacity: 0; }
+}
+
+/* ============================================================
+   MOBILE + REDUCED MOTION
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .space-rocket-wrap     { display: none !important; }
+    .shooting-star         { display: none !important; }
+    .particle-orb          { display: none !important; }
+    .particle-sparkle      { display: none !important; }
+    .cursor-trail-dot      { display: none !important; }
+    .hero-float-astronaut  { display: none !important; }
+    .contact-section::before { display: none !important; }
+    .about-tag             { animation: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .space-rocket-wrap,
+    .shooting-star,
+    .particle-orb,
+    .particle-sparkle,
+    .cursor-trail-dot,
+    .hero-float-astronaut,
+    .rocket-flame,
+    .space-planet,
+    .space-star            { animation: none !important; display: none !important; }
+    .hero-title.glitching .line::before,
+    .hero-title.glitching .line::after { display: none !important; }
+    .about-tag             { animation: none !important; }
+    .contact-section::before { animation: none !important; }
+}
