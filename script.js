@@ -672,7 +672,7 @@
 
 
 /* ============================================================
-   TIMELINE — Line draw on enter
+   TIMELINE — Line draw on enter (per-track)
    ============================================================ */
 (function initTimeline() {
     const archive = document.querySelector('.archive-section');
@@ -686,4 +686,16 @@
         });
     }, { threshold: 0.15 });
     observer.observe(archive);
+
+    // Per-timeline-track line draw
+    const tracks = document.querySelectorAll('.timeline');
+    const tio = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('timeline-track-active');
+                tio.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    tracks.forEach(t => tio.observe(t));
 })();
