@@ -669,3 +669,21 @@
     }, { threshold: 0.08 });
     sections.forEach(s => observer.observe(s));
 })();
+
+
+/* ============================================================
+   TIMELINE — Line draw on enter
+   ============================================================ */
+(function initTimeline() {
+    const archive = document.querySelector('.archive-section');
+    if (!archive) return;
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('timeline-active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+    observer.observe(archive);
+})();
