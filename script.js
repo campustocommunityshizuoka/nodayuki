@@ -672,6 +672,136 @@
 
 
 /* ============================================================
+   SCROLL PROGRESS BAR
+   ============================================================ */
+(function initScrollProgress() {
+    const bar = document.getElementById('scrollProgress');
+    if (!bar) return;
+    function update() {
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = total > 0 ? (window.scrollY / total) * 100 : 0;
+        bar.style.width = pct + '%';
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+})();
+
+
+/* ============================================================
+   SECTION NAV DOTS — Active tracking + smooth scroll
+   ============================================================ */
+(function initSectionNav() {
+    const links = document.querySelectorAll('.section-nav a');
+    if (!links.length) return;
+    const sections = Array.from(links).map(link => {
+        const id = link.getAttribute('href');
+        return id ? document.querySelector(id) : null;
+    });
+
+    function update() {
+        const trigger = window.scrollY + window.innerHeight * 0.35;
+        let activeIdx = 0;
+        sections.forEach((sec, i) => {
+            if (sec && sec.offsetTop <= trigger) activeIdx = i;
+        });
+        links.forEach((link, i) => {
+            link.classList.toggle('active', i === activeIdx);
+        });
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+})();
+
+
+/* ============================================================
+   MAGNETIC BUTTONS
+   ============================================================ */
+(function initMagneticButtons() {
+    if (window.matchMedia('(hover: none)').matches) return;
+    const targets = document.querySelectorAll('.btn-hero, .card-link-btn');
+    targets.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const r = btn.getBoundingClientRect();
+            const x = e.clientX - r.left - r.width  / 2;
+            const y = e.clientY - r.top  - r.height / 2;
+            btn.style.transform = 'translate(' + (x * 0.28) + 'px, ' + (y * 0.28) + 'px)';
+        });
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = '';
+        });
+    });
+})();
+
+
+/* ============================================================
+   KONAMI CODE EASTER EGG — ↑↑↓↓←→←→BA
+   ============================================================ */
+(function initKonami() {
+    const seq = ['arrowup','arrowup','arrowdown','arrowdown','arrowleft','arrowright','arrowleft','arrowright','b','a'];
+    let pos = 0;
+    let active = false;
+
+    document.addEventListener('keydown', (e) => {
+        const key = (e.key || '').toLowerCase();
+        if (key === seq[pos]) {
+            pos++;
+            if (pos === seq.length && !active) {
+                pos = 0;
+                trigger();
+            }
+        } else if (key === seq[0]) {
+            pos = 1;
+        } else {
+            pos = 0;
+        }
+    });
+
+    function trigger() {
+        active = true;
+
+        // Notification banner
+        const notif = document.createElement('div');
+        notif.className = 'konami-notif';
+        notif.innerHTML = '🚀 SUPER ROCKET MODE 🚀';
+        document.body.appendChild(notif);
+        setTimeout(() => notif.remove(), 4100);
+
+        // Spawn 25 rockets flying across the screen
+        for (let i = 0; i < 25; i++) {
+            setTimeout(spawnRocket, i * 160);
+        }
+
+        setTimeout(() => { active = false; }, 5000);
+    }
+
+    function spawnRocket() {
+        const r = document.createElement('div');
+        r.className = 'konami-rocket-fly';
+        r.textContent = '🚀';
+        const startY = 10 + Math.random() * 80;
+        const drift  = -10 - Math.random() * 30;
+        const dur    = 2.2 + Math.random() * 1.8;
+        const size   = 1.4 + Math.random() * 2.2;
+        r.style.cssText = [
+            'left: -60px',
+            'top: ' + startY + 'vh',
+            'font-size: ' + size + 'rem',
+            'transition: left ' + dur + 's linear, top ' + dur + 's linear, opacity 0.4s'
+        ].join(';');
+        document.body.appendChild(r);
+        requestAnimationFrame(() => {
+            r.style.left = '110vw';
+            r.style.top  = (startY + drift) + 'vh';
+        });
+        setTimeout(() => { r.style.opacity = '0'; }, dur * 900);
+        setTimeout(() => r.remove(), dur * 1000 + 500);
+    }
+})();
+
+
+/* ============================================================
    TIMELINE — Line draw on enter (per-track)
    ============================================================ */
 (function initTimeline() {

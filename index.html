@@ -5,6 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yuki Noda | Portfolio</title>
+
+    <!-- SEO -->
+    <meta name="description" content="野田 悠生 (Yuki Noda) — 静岡大学 工学部 機械工学科 / しずおかコネクト 代表 / JOINX × UNIBASE 宇宙事業。Creating Real Value — 静岡から、未来をつくる。">
+    <meta name="keywords" content="野田悠生, Yuki Noda, しずおかコネクト, 静岡大学, 機械工学, JOINX, UNIBASE, 宇宙事業, ポートフォリオ">
+    <meta name="author" content="Yuki Noda">
+    <meta name="theme-color" content="#080c06">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Yuki Noda | Portfolio">
+    <meta property="og:description" content="Creating Real Value — 静岡から、未来をつくる。">
+    <meta property="og:url" content="https://office-noda.shizuoka-connect.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Yuki Noda Portfolio">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:image" content="https://office-noda.shizuoka-connect.com/photo-formal.jpg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Yuki Noda | Portfolio">
+    <meta name="twitter:description" content="Creating Real Value — 静岡から、未来をつくる。">
+    <meta name="twitter:image" content="https://office-noda.shizuoka-connect.com/photo-formal.jpg">
+
+    <!-- Favicon (inline SVG) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23080c06' stroke='%23b8f05c' stroke-width='3'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-weight='900' font-size='56' text-anchor='middle' fill='%23b8f05c' font-style='italic'%3EY%3C/text%3E%3C/svg%3E">
+
     <link rel="stylesheet" href="style.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap"
@@ -51,8 +76,20 @@
         </div>
     </header>
 
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Section Navigation Dots -->
+    <nav class="section-nav" aria-label="Section navigation">
+        <a href="#hero" data-label="HOME"><span></span></a>
+        <a href="#about" data-label="ABOUT"><span></span></a>
+        <a href="#works" data-label="WORKS"><span></span></a>
+        <a href="#archive" data-label="ARCHIVE"><span></span></a>
+        <a href="#contact" data-label="CONTACT"><span></span></a>
+    </nav>
+
     <!-- Hero -->
-    <section class="hero">
+    <section id="hero" class="hero">
         <div id="leaf-container"></div>
         <div class="hero-side-text">SHIZUOKA — 2026 — PORTFOLIO</div>
 
