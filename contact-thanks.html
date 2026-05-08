@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>送信完了 | Yuki Noda</title>
+    <meta name="theme-color" content="#080c06">
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23080c06' stroke='%23b8f05c' stroke-width='3'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-weight='900' font-size='56' text-anchor='middle' fill='%23b8f05c' font-style='italic'%3EY%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .thx-wrap {
+            text-align: center;
+            position: relative;
+            z-index: 5;
+            padding: 0 5vw;
+            max-width: 720px;
+        }
+
+        .thx-checkmark {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 36px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 60px rgba(184, 240, 92, 0.35),
+                inset 0 0 30px rgba(184, 240, 92, 0.1);
+            animation: thxRing 2s ease-in-out infinite;
+            position: relative;
+        }
+
+        .thx-checkmark svg {
+            width: 50px;
+            height: 50px;
+            stroke-dasharray: 60;
+            stroke-dashoffset: 60;
+            animation: thxDraw 1.2s 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes thxDraw {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes thxRing {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 60px rgba(184,240,92,0.35), inset 0 0 30px rgba(184,240,92,0.1); }
+            50%       { transform: scale(1.04); box-shadow: 0 0 90px rgba(184,240,92,0.5), inset 0 0 40px rgba(184,240,92,0.15); }
+        }
+
+        .thx-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 6px;
+            color: var(--accent);
+            margin: 0 0 18px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: thxFadeUp 0.7s 0.6s forwards;
+        }
+
+        .thx-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--text);
+            margin: 0 0 24px;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            opacity: 0;
+            animation: thxFadeUp 0.7s 0.8s forwards;
+        }
+
+        .thx-title em {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        .thx-desc {
+            font-family: var(--font-mono);
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin: 0 0 50px;
+            line-height: 1.85;
+            opacity: 0;
+            animation: thxFadeUp 0.7s 1s forwards;
+        }
+
+        @keyframes thxFadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .thx-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 40px;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-decoration: none;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.3s ease;
+            border-radius: 999px;
+            opacity: 0;
+            animation: thxFadeUp 0.7s 1.2s forwards;
+        }
+
+        .thx-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: -1;
+        }
+
+        .thx-btn:hover {
+            color: var(--bg);
+        }
+
+        .thx-btn:hover::before {
+            transform: scaleX(1);
+        }
+
+        .thx-stars {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .thx-stars .space-star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: starTwinkle var(--twinkle-dur, 2s) ease-in-out infinite;
+            animation-delay: var(--twinkle-delay, 0s);
+        }
+
+        /* Confetti rockets */
+        .thx-rocket {
+            position: fixed;
+            font-size: 1.6rem;
+            z-index: 2;
+            pointer-events: none;
+            animation: thxRocketFly var(--rdur, 4s) linear forwards;
+            animation-delay: var(--rdelay, 0s);
+            opacity: 0;
+        }
+
+        @keyframes thxRocketFly {
+            0%   { opacity: 0; transform: translate(var(--rx0, 0vw), 110vh) rotate(-45deg); }
+            5%   { opacity: 1; }
+            95%  { opacity: 1; }
+            100% { opacity: 0; transform: translate(var(--rx1, 100vw), -20vh) rotate(-45deg); }
+        }
+    </style>
+</head>
+
+<body class="loaded">
+    <div class="grain"></div>
+    <div class="thx-stars" id="thxStars"></div>
+
+    <div class="thx-wrap">
+        <div class="thx-checkmark">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="#b8f05c" stroke-width="2.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </div>
+
+        <div class="thx-label">— MESSAGE SENT —</div>
+        <h1 class="thx-title">ありがとう<em>ございます。</em></h1>
+        <p class="thx-desc">
+            お問い合わせを正常に受け付けました。<br>
+            内容を確認の上、1〜2営業日以内にご返信いたします。<br>
+            しばらくお待ちください。
+        </p>
+
+        <a href="/" class="thx-btn">← BACK TO HOME</a>
+    </div>
+
+    <script>
+        // Stars
+        (function () {
+            const c = document.getElementById('thxStars');
+            for (let i = 0; i < 80; i++) {
+                const s = document.createElement('div');
+                s.className = 'space-star';
+                const sz = 1 + Math.random() * 2.5;
+                s.style.cssText = [
+                    'width:' + sz + 'px',
+                    'height:' + sz + 'px',
+                    'left:' + (Math.random() * 100) + '%',
+                    'top:' + (Math.random() * 100) + '%',
+                    '--twinkle-dur:' + (1.2 + Math.random() * 3) + 's',
+                    '--twinkle-delay:' + (Math.random() * 5) + 's',
+                    '--star-opacity:' + (0.4 + Math.random() * 0.5)
+                ].join(';');
+                c.appendChild(s);
+            }
+        })();
+        // Confetti rockets
+        (function () {
+            for (let i = 0; i < 12; i++) {
+                const r = document.createElement('div');
+                r.className = 'thx-rocket';
+                r.textContent = '🚀';
+                r.style.cssText = [
+                    'font-size:' + (1.2 + Math.random() * 1.8) + 'rem',
+                    '--rx0:' + (-10 + Math.random() * 20) + 'vw',
+                    '--rx1:' + (90 + Math.random() * 30) + 'vw',
+                    '--rdur:' + (3.5 + Math.random() * 2.5) + 's',
+                    '--rdelay:' + (Math.random() * 2) + 's'
+                ].join(';');
+                document.body.appendChild(r);
+            }
+        })();
+    </script>
+</body>
+
+</html>
