@@ -2846,6 +2846,76 @@ footer {
 
 
 /* ============================================================
+   FLAGSHIP CARD — Largest Project Badge
+   ============================================================ */
+
+.card--flagship {
+    position: relative;
+    overflow: hidden;
+}
+
+.card--flagship::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg,
+        rgba(184, 240, 92, 0.6),
+        transparent 30%,
+        transparent 70%,
+        rgba(184, 240, 92, 0.45)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.flagship-badge {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    z-index: 8;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border-radius: 999px;
+    box-shadow: 0 4px 20px rgba(184, 240, 92, 0.4);
+    animation: flagshipFloat 3s ease-in-out infinite;
+}
+
+@keyframes flagshipFloat {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-3px); }
+}
+
+.flagship-pulse {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--bg);
+    box-shadow: 0 0 0 0 rgba(8, 12, 6, 0.5);
+    animation: flagshipPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes flagshipPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(8, 12, 6, 0.7); transform: scale(1); }
+    70%  { box-shadow: 0 0 0 7px rgba(8, 12, 6, 0); transform: scale(1.2); }
+    100% { box-shadow: 0 0 0 0 rgba(8, 12, 6, 0); transform: scale(1); }
+}
+
+/* ============================================================
    SCROLL PROGRESS BAR
    ============================================================ */
 .scroll-progress {

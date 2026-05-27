@@ -205,14 +205,17 @@
                 </h2>
                 <div class="about-bio reveal-item" style="transition-delay:0.12s">
                     <p>静岡大学工学部機械工学科で学びながら、自ら立ち上げた「しずおかコネクト」の代表として地域と学生をつなぐ活動を続けています。</p>
-                    <p>エンジニアリングの論理的思考とコミュニティデザインを組み合わせ、人と技術が共鳴する場をつくることに情熱を注いでいます。</p>
+                    <p>Web・アプリ開発からハードウェア設計・開発まで、ソフトとフィジカル両面で課題解決を実践。エンジニアリングの論理的思考とコミュニティデザインを組み合わせ、人と技術が共鳴する場をつくることに情熱を注いでいます。</p>
                 </div>
                 <div class="about-tags reveal-item" style="transition-delay:0.22s">
                     <span class="about-tag">静岡大学</span>
                     <span class="about-tag">機械工学科</span>
                     <span class="about-tag">しずおかコネクト</span>
                     <span class="about-tag">Web Dev</span>
+                    <span class="about-tag">App Dev</span>
                     <span class="about-tag">Firebase</span>
+                    <span class="about-tag">ハードウェア設計</span>
+                    <span class="about-tag">ハードウェア開発</span>
                     <span class="about-tag">制御工学</span>
                 </div>
             </div>
@@ -229,8 +232,8 @@
         </div>
 
         <div class="cards-grid">
-            <!-- Card 1: しずおかコネクト -->
-            <div class="card card--large reveal-item" style="transition-delay:0s;">
+            <!-- Card 1: しずおかコネクト (large, spans 2 rows) -->
+            <div class="card card--large reveal-item" style="transition-delay:0s; grid-row: span 2;">
                 <div class="card-num">01</div>
                 <div class="card-image-wrap card-image-wrap--tall">
                     <img src="img connect.png" alt="しずおかコネクト" class="card-img" />
@@ -246,16 +249,37 @@
                 </div>
             </div>
 
-            <!-- Card 2: Web・アプリ開発 -->
-            <div class="card reveal-item" style="transition-delay:0.15s">
+            <!-- Card 2: x.shizuoka-connect.com (flagship webapp) -->
+            <div class="card card--flagship reveal-item" style="transition-delay:0.15s">
+                <div class="flagship-badge" aria-hidden="true">
+                    <span class="flagship-pulse"></span>
+                    LARGEST PROJECT
+                </div>
                 <div class="card-num">02</div>
                 <div class="card-image-wrap">
-                    <img src="img software.png" alt="Web・アプリ開発" class="card-img" />
+                    <img src="img software.png" alt="x.shizuoka-connect.com" class="card-img" />
                 </div>
                 <div class="card-body">
-                    <span class="card-tag">Web / App Development</span>
-                    <h3>Web・アプリ開発</h3>
-                    <p>クライアントの要望に応じたカスタマイズ制作。HTML / CSS / JavaScript・Firebaseを活用し、課題解決のためのシステムを設計・実装。</p>
+                    <span class="card-tag new-tag">Flagship Webapp</span>
+                    <h3>x.shizuoka-connect.com</h3>
+                    <p>これまでに開発した中で最大規模のWebアプリケーション。しずおかコネクトのプラットフォーム上で稼働し、複数機能を統合した実運用システムとして展開中。</p>
+                    <a href="https://x.shizuoka-connect.com/" target="_blank" rel="noopener" class="card-link-btn">
+                        <span>VIEW APP</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 3: Web・アプリ・ハードウェア開発 -->
+            <div class="card reveal-item" style="transition-delay:0.22s">
+                <div class="card-num">03</div>
+                <div class="card-image-wrap">
+                    <img src="img software.png" alt="Web・アプリ・ハードウェア開発" class="card-img" />
+                </div>
+                <div class="card-body">
+                    <span class="card-tag">Web / App / Hardware</span>
+                    <h3>Web・アプリ・ハードウェア 開発</h3>
+                    <p>Webやアプリだけでなく、ハードウェア設計・開発も実施。ソフトとフィジカル両面で、課題に応じたシステムを一気通貫で設計・実装。</p>
                     <div class="webdev-stats">
                         <div class="webdev-stat">
                             <span class="webdev-stat-num">20<span class="webdev-stat-unit">件</span></span>
@@ -304,16 +328,30 @@
                 <div class="timeline-dot"></div>
             </div>
 
-            <!-- ACTIVE 2: Web/App受託 -->
+            <!-- ACTIVE 2: x.shizuoka-connect.com (flagship webapp) -->
             <div class="timeline-item reveal-item current" data-side="right" style="transition-delay:0.1s">
                 <div class="timeline-status active">
                     <span class="status-pulse-dot"></span>
                     LIVE
                 </div>
                 <div class="timeline-content">
-                    <span class="timeline-tag new-tag">Web / App Dev</span>
-                    <h3>Web・アプリ 受託開発</h3>
-                    <p>クライアントワーク継続中。HTML/CSS/JavaScript・Firebase を活用し、要件に応じたシステム設計・実装を提供。新規案件随時対応。</p>
+                    <span class="timeline-tag new-tag">Flagship Webapp</span>
+                    <h3>x.shizuoka-connect.com 運営・開発</h3>
+                    <p>これまでに構築した中で最大規模のWebアプリケーション。設計・実装から運用まで一貫して担当し、継続的に機能追加・改善を実施中。</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <!-- ACTIVE 3: Web/App/Hardware受託 -->
+            <div class="timeline-item reveal-item current" data-side="left" style="transition-delay:0.15s">
+                <div class="timeline-status active">
+                    <span class="status-pulse-dot"></span>
+                    LIVE
+                </div>
+                <div class="timeline-content">
+                    <span class="timeline-tag new-tag">Web / App / Hardware</span>
+                    <h3>Web・アプリ・ハードウェア 受託開発</h3>
+                    <p>クライアントワーク継続中。Web/アプリに加え、ハードウェア設計・開発も対応。ソフト・フィジカル両面で要件に応じたシステムを提供。</p>
                 </div>
                 <div class="timeline-dot"></div>
             </div>
@@ -369,18 +407,32 @@
                 </div>
                 <div class="timeline-dot"></div>
             </div>
+
+            <!-- PAST 4: ハードウェア設計開発 -->
+            <div class="timeline-item reveal-item" data-side="right" style="transition-delay:0.2s">
+                <div class="timeline-status">
+                    <span class="status-check">✓</span>
+                    DELIVERED
+                </div>
+                <div class="timeline-content">
+                    <span class="timeline-tag">Hardware</span>
+                    <h3>ハードウェア 設計・開発</h3>
+                    <p>機械工学の知見を活かしたハードウェアプロダクトの設計・試作・実装。ソフトとフィジカルを統合した一気通貫の開発を実施。</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
         </div>
     </section>
 
     <!-- Marquee -->
     <div class="marquee-section">
         <div class="marquee-track">
-            <span>SHIZUOKA CONNECT &nbsp;—&nbsp; SOFTWARE DEVELOPMENT &nbsp;—&nbsp; WEB DEVELOPMENT &nbsp;—&nbsp; FIREBASE &nbsp;—&nbsp; 産学官連携 &nbsp;—&nbsp; 機械工学 &nbsp;—&nbsp; 静岡大学 &nbsp;—&nbsp; </span>
-            <span>SHIZUOKA CONNECT &nbsp;—&nbsp; SOFTWARE DEVELOPMENT &nbsp;—&nbsp; WEB DEVELOPMENT &nbsp;—&nbsp; FIREBASE &nbsp;—&nbsp; 産学官連携 &nbsp;—&nbsp; 機械工学 &nbsp;—&nbsp; 静岡大学 &nbsp;—&nbsp; </span>
+            <span>SHIZUOKA CONNECT &nbsp;—&nbsp; X.SHIZUOKA-CONNECT.COM &nbsp;—&nbsp; SOFTWARE DEVELOPMENT &nbsp;—&nbsp; WEB DEVELOPMENT &nbsp;—&nbsp; FIREBASE &nbsp;—&nbsp; 産学官連携 &nbsp;—&nbsp; 機械工学 &nbsp;—&nbsp; 静岡大学 &nbsp;—&nbsp; </span>
+            <span>SHIZUOKA CONNECT &nbsp;—&nbsp; X.SHIZUOKA-CONNECT.COM &nbsp;—&nbsp; SOFTWARE DEVELOPMENT &nbsp;—&nbsp; WEB DEVELOPMENT &nbsp;—&nbsp; FIREBASE &nbsp;—&nbsp; 産学官連携 &nbsp;—&nbsp; 機械工学 &nbsp;—&nbsp; 静岡大学 &nbsp;—&nbsp; </span>
         </div>
         <div class="marquee-track marquee-track--reverse">
-            <span>APP DEVELOPMENT &nbsp;—&nbsp; AI &nbsp;—&nbsp; 地方創生 &nbsp;—&nbsp; しずおかコネクト &nbsp;—&nbsp; 学生×地域 &nbsp;—&nbsp; インターンシップ &nbsp;—&nbsp; コミュニティデザイン &nbsp;—&nbsp; </span>
-            <span>APP DEVELOPMENT &nbsp;—&nbsp; AI &nbsp;—&nbsp; 地方創生 &nbsp;—&nbsp; しずおかコネクト &nbsp;—&nbsp; 学生×地域 &nbsp;—&nbsp; インターンシップ &nbsp;—&nbsp; コミュニティデザイン &nbsp;—&nbsp; </span>
+            <span>APP DEVELOPMENT &nbsp;—&nbsp; HARDWARE DESIGN &nbsp;—&nbsp; ハードウェア開発 &nbsp;—&nbsp; AI &nbsp;—&nbsp; 地方創生 &nbsp;—&nbsp; しずおかコネクト &nbsp;—&nbsp; 学生×地域 &nbsp;—&nbsp; コミュニティデザイン &nbsp;—&nbsp; </span>
+            <span>APP DEVELOPMENT &nbsp;—&nbsp; HARDWARE DESIGN &nbsp;—&nbsp; ハードウェア開発 &nbsp;—&nbsp; AI &nbsp;—&nbsp; 地方創生 &nbsp;—&nbsp; しずおかコネクト &nbsp;—&nbsp; 学生×地域 &nbsp;—&nbsp; コミュニティデザイン &nbsp;—&nbsp; </span>
         </div>
     </div>
 
