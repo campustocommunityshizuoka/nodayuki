@@ -233,8 +233,8 @@
         </div>
 
         <div class="cards-grid">
-            <!-- Card 1: しずおかコネクト (large, spans 2 rows) -->
-            <div class="card card--large reveal-item" style="transition-delay:0s; grid-row: span 2;">
+            <!-- Card 1: しずおかコネクト -->
+            <div class="card card--large reveal-item" style="transition-delay:0s;">
                 <div class="card-num">01</div>
                 <div class="card-image-wrap card-image-wrap--tall">
                     <img src="img connect.png" alt="しずおかコネクト" class="card-img" />
@@ -250,37 +250,16 @@
                 </div>
             </div>
 
-            <!-- Card 2: x.shizuoka-connect.com (flagship webapp) -->
-            <div class="card card--flagship reveal-item" style="transition-delay:0.15s">
-                <div class="flagship-badge" aria-hidden="true">
-                    <span class="flagship-pulse"></span>
-                    LARGEST PROJECT
-                </div>
+            <!-- Card 2: Web・アプリ・ハードウェア開発 (clickable → projects modal) -->
+            <button class="card card--interactive reveal-item" type="button" id="projectsCardBtn" style="transition-delay:0.15s">
                 <div class="card-num">02</div>
-                <div class="card-image-wrap">
-                    <img src="img software.png" alt="x.shizuoka-connect.com" class="card-img" />
-                </div>
-                <div class="card-body">
-                    <span class="card-tag new-tag">Flagship Webapp</span>
-                    <h3>x.shizuoka-connect.com</h3>
-                    <p>これまでに開発した中で最大規模のWebアプリケーション。しずおかコネクトのプラットフォーム上で稼働し、複数機能を統合した実運用システムとして展開中。</p>
-                    <a href="https://x.shizuoka-connect.com/" target="_blank" rel="noopener" class="card-link-btn">
-                        <span>VIEW APP</span>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Card 3: Web・アプリ・ハードウェア開発 -->
-            <div class="card reveal-item" style="transition-delay:0.22s">
-                <div class="card-num">03</div>
                 <div class="card-image-wrap">
                     <img src="img software.png" alt="Web・アプリ・ハードウェア開発" class="card-img" />
                 </div>
                 <div class="card-body">
                     <span class="card-tag">Web / App / Hardware</span>
                     <h3>Web・アプリ・ハードウェア 開発</h3>
-                    <p>Webやアプリだけでなく、ハードウェア設計・開発も実施。ソフトとフィジカル両面で、課題に応じたシステムを一気通貫で設計・実装。</p>
+                    <p>Webやアプリだけでなく、ハードウェア設計・開発まで。ソフトとフィジカル両面で、課題に応じたシステムを一気通貫で設計・実装。</p>
                     <div class="webdev-stats">
                         <div class="webdev-stat">
                             <span class="webdev-stat-num">20<span class="webdev-stat-unit">件</span></span>
@@ -292,136 +271,121 @@
                             <span class="webdev-stat-label">アプリ 開発実績</span>
                         </div>
                     </div>
+                    <span class="card-interactive-hint">
+                        VIEW PROJECTS
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 12h14m0 0l-7-7m7 7l-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </span>
                 </div>
-            </div>
+            </button>
 
         </div>
     </section>
 
-    <!-- Archive / Journey -->
+    <!-- Archive -->
     <section id="archive" class="archive-section">
         <div class="archive-header">
-            <div class="section-label">02 — ARCHIVE / 歩み</div>
-            <h2 class="section-title reveal-item">これまでの軌跡</h2>
-            <p class="section-desc reveal-item" style="transition-delay:0.1s">学びと挑戦を重ねてきた、過去のプロジェクト群</p>
+            <div class="section-label">02 — ARCHIVE</div>
+            <h2 class="section-title reveal-item">プロジェクト一覧</h2>
+            <p class="section-desc reveal-item" style="transition-delay:0.1s">進行中の取り組みと、これまで納品したプロジェクトを一覧表示</p>
         </div>
 
-        <div class="timeline-status-divider">
-            <span class="status-divider-dot"></span>
-            <span>NOW &nbsp;/&nbsp; 進行中</span>
-            <span class="status-divider-dot"></span>
+        <div class="archive-tabs reveal-item" role="tablist" style="transition-delay:0.15s">
+            <button class="archive-tab active" data-filter="all" role="tab" aria-selected="true">
+                <span class="archive-tab-label">ALL</span>
+                <span class="archive-tab-count">6</span>
+            </button>
+            <button class="archive-tab" data-filter="now" role="tab" aria-selected="false">
+                <span class="archive-tab-dot"></span>
+                <span class="archive-tab-label">進行中</span>
+                <span class="archive-tab-count">2</span>
+            </button>
+            <button class="archive-tab" data-filter="done" role="tab" aria-selected="false">
+                <span class="archive-tab-check">✓</span>
+                <span class="archive-tab-label">完了</span>
+                <span class="archive-tab-count">4</span>
+            </button>
         </div>
 
-        <div class="timeline">
-            <div class="timeline-line"></div>
+        <div class="archive-grid">
+            <!-- NOW: しずおかコネクト -->
+            <article class="archive-card reveal-item" data-status="now">
+                <div class="archive-card-status active">
+                    <span class="archive-status-pulse"></span>
+                    <span>進行中</span>
+                </div>
+                <div class="archive-card-meta">
+                    <span class="archive-card-tag">FOUNDER · COMMUNITY</span>
+                </div>
+                <h3 class="archive-card-title">しずおかコネクト 運営</h3>
+                <p class="archive-card-desc">学生と地域企業をつなぐ独自プラットフォームの代表として継続運営。セミナー・インターン・地域課題解決を企画から実行までリード。</p>
+            </article>
 
-            <!-- ACTIVE 1: しずおかコネクト -->
-            <div class="timeline-item reveal-item current" data-side="left">
-                <div class="timeline-status active">
-                    <span class="status-pulse-dot"></span>
-                    LIVE
+            <!-- NOW: Web/App/Hardware受託 -->
+            <article class="archive-card reveal-item" data-status="now" style="transition-delay:0.08s">
+                <div class="archive-card-status active">
+                    <span class="archive-status-pulse"></span>
+                    <span>進行中</span>
                 </div>
-                <div class="timeline-content">
-                    <span class="timeline-tag new-tag">Founder · Community</span>
-                    <h3>しずおかコネクト 運営</h3>
-                    <p>学生と地域企業をつなぐ独自プラットフォームの代表として継続運営。セミナー・インターン・地域課題解決プロジェクトを企画から実行までリード。</p>
+                <div class="archive-card-meta">
+                    <span class="archive-card-tag">WEB / APP / HARDWARE</span>
                 </div>
-                <div class="timeline-dot"></div>
-            </div>
+                <h3 class="archive-card-title">受託開発 継続中</h3>
+                <p class="archive-card-desc">クライアントワーク継続。Web/アプリに加えハードウェア設計・開発も対応。ソフト×フィジカル両面で要件に応じたシステムを提供。</p>
+            </article>
 
-            <!-- ACTIVE 2: x.shizuoka-connect.com (flagship webapp) -->
-            <div class="timeline-item reveal-item current" data-side="right" style="transition-delay:0.1s">
-                <div class="timeline-status active">
-                    <span class="status-pulse-dot"></span>
-                    LIVE
+            <!-- DONE: AIアバター 日本語教育動画 -->
+            <article class="archive-card reveal-item" data-status="done" style="transition-delay:0.12s">
+                <div class="archive-card-status">
+                    <span class="archive-status-check">✓</span>
+                    <span>完了</span>
                 </div>
-                <div class="timeline-content">
-                    <span class="timeline-tag new-tag">Flagship Webapp</span>
-                    <h3>x.shizuoka-connect.com 運営・開発</h3>
-                    <p>これまでに構築した中で最大規模のWebアプリケーション。設計・実装から運用まで一貫して担当し、継続的に機能追加・改善を実施中。</p>
+                <div class="archive-card-meta">
+                    <span class="archive-card-tag">AI · EDUCATION</span>
                 </div>
-                <div class="timeline-dot"></div>
-            </div>
+                <h3 class="archive-card-title">AI アバター × 日本語教育動画</h3>
+                <p class="archive-card-desc">海外の日本語学習者向けに、AIアバターを活用した教育動画コンテンツを企画・制作。新しい学習体験を実装した先進プロジェクト。</p>
+            </article>
 
-            <!-- ACTIVE 3: Web/App/Hardware受託 -->
-            <div class="timeline-item reveal-item current" data-side="left" style="transition-delay:0.15s">
-                <div class="timeline-status active">
-                    <span class="status-pulse-dot"></span>
-                    LIVE
+            <!-- DONE: 決済〜動画配信システム -->
+            <article class="archive-card reveal-item" data-status="done" style="transition-delay:0.18s">
+                <div class="archive-card-status">
+                    <span class="archive-status-check">✓</span>
+                    <span>完了</span>
                 </div>
-                <div class="timeline-content">
-                    <span class="timeline-tag new-tag">Web / App / Hardware</span>
-                    <h3>Web・アプリ・ハードウェア 受託開発</h3>
-                    <p>クライアントワーク継続中。Web/アプリに加え、ハードウェア設計・開発も対応。ソフト・フィジカル両面で要件に応じたシステムを提供。</p>
+                <div class="archive-card-meta">
+                    <span class="archive-card-tag">FULL-STACK SYSTEM</span>
                 </div>
-                <div class="timeline-dot"></div>
-            </div>
-        </div>
+                <h3 class="archive-card-title">決済 → 動画配信 システム</h3>
+                <p class="archive-card-desc">教育動画プロジェクト用に、決済処理から動画配信まで一気通貫で実装。ユーザーが安全にコンテンツへアクセスできる基盤を構築。</p>
+            </article>
 
-        <div class="timeline-status-divider archived">
-            <span class="status-divider-dot archived"></span>
-            <span>ARCHIVE &nbsp;/&nbsp; 完了プロジェクト</span>
-            <span class="status-divider-dot archived"></span>
-        </div>
+            <!-- DONE: 就活サイト -->
+            <article class="archive-card reveal-item" data-status="done" style="transition-delay:0.22s">
+                <div class="archive-card-status">
+                    <span class="archive-status-check">✓</span>
+                    <span>完了</span>
+                </div>
+                <div class="archive-card-meta">
+                    <span class="archive-card-tag">WEB PLATFORM</span>
+                </div>
+                <h3 class="archive-card-title">就活サイト 制作</h3>
+                <p class="archive-card-desc">学生向け就職活動支援Webサイトの設計・実装。情報整理・直感的なUI/UX・モバイル最適化に注力し、利用者目線のプロダクトを納品。</p>
+            </article>
 
-        <div class="timeline">
-            <div class="timeline-line"></div>
-
-            <!-- PAST 1: AIアバター 日本語教育動画 -->
-            <div class="timeline-item reveal-item" data-side="left">
-                <div class="timeline-status">
-                    <span class="status-check">✓</span>
-                    DELIVERED
+            <!-- DONE: ハードウェア設計開発 -->
+            <article class="archive-card reveal-item" data-status="done" style="transition-delay:0.28s">
+                <div class="archive-card-status">
+                    <span class="archive-status-check">✓</span>
+                    <span>完了</span>
                 </div>
-                <div class="timeline-content">
-                    <span class="timeline-tag">AI · Education</span>
-                    <h3>AI アバター × 日本語教育動画</h3>
-                    <p>海外の日本語学習者を対象に、AIアバターを活用した教育動画コンテンツを企画・制作。これまでにない学習体験を実装した先進プロジェクト。</p>
+                <div class="archive-card-meta">
+                    <span class="archive-card-tag">HARDWARE</span>
                 </div>
-                <div class="timeline-dot"></div>
-            </div>
-
-            <!-- PAST 2: 決済〜動画配信システム -->
-            <div class="timeline-item reveal-item" data-side="right" style="transition-delay:0.1s">
-                <div class="timeline-status">
-                    <span class="status-check">✓</span>
-                    DELIVERED
-                </div>
-                <div class="timeline-content">
-                    <span class="timeline-tag">Full-stack System</span>
-                    <h3>決済 → 動画配信 システム 開発</h3>
-                    <p>上記プロジェクト用に、決済処理から動画配信までを一気通貫で実装。ユーザーが安全に教育コンテンツへアクセスできる基盤をフルスタックで構築。</p>
-                </div>
-                <div class="timeline-dot"></div>
-            </div>
-
-            <!-- PAST 3: 就活サイト -->
-            <div class="timeline-item reveal-item" data-side="left" style="transition-delay:0.15s">
-                <div class="timeline-status">
-                    <span class="status-check">✓</span>
-                    DELIVERED
-                </div>
-                <div class="timeline-content">
-                    <span class="timeline-tag">Web Platform</span>
-                    <h3>就活サイト 制作</h3>
-                    <p>学生向け就職活動支援Webサイトの設計・実装。情報整理・直感的なUI/UX・モバイル最適化に注力し、利用者目線のプロダクトを納品。</p>
-                </div>
-                <div class="timeline-dot"></div>
-            </div>
-
-            <!-- PAST 4: ハードウェア設計開発 -->
-            <div class="timeline-item reveal-item" data-side="right" style="transition-delay:0.2s">
-                <div class="timeline-status">
-                    <span class="status-check">✓</span>
-                    DELIVERED
-                </div>
-                <div class="timeline-content">
-                    <span class="timeline-tag">Hardware</span>
-                    <h3>ハードウェア 設計・開発</h3>
-                    <p>機械工学の知見を活かしたハードウェアプロダクトの設計・試作・実装。ソフトとフィジカルを統合した一気通貫の開発を実施。</p>
-                </div>
-                <div class="timeline-dot"></div>
-            </div>
+                <h3 class="archive-card-title">ハードウェア 設計・開発</h3>
+                <p class="archive-card-desc">機械工学の知見を活かしたハードウェアプロダクトの設計・試作・実装。ソフトとフィジカルを統合した一気通貫の開発を実施。</p>
+            </article>
         </div>
     </section>
 
@@ -515,6 +479,73 @@
             <span class="footer-copy">© 2026 — All rights reserved</span>
         </div>
     </footer>
+
+    <!-- Projects Detail Modal (Web/App/Hardware) -->
+    <div class="projects-modal" id="projectsModal" aria-hidden="true">
+        <div class="projects-modal-backdrop" data-projects-close></div>
+        <div class="projects-modal-content" role="dialog" aria-labelledby="projectsModalTitle">
+            <button class="projects-modal-close" data-projects-close aria-label="閉じる">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+            </button>
+
+            <div class="projects-modal-header">
+                <div class="projects-modal-label">— PROJECTS / 実績一覧 —</div>
+                <h2 id="projectsModalTitle">Web・アプリ・ハードウェア 開発</h2>
+                <p>多様な技術領域で課題解決を提供してきた、実践実績の数々。代表事例を以下に紹介。</p>
+            </div>
+
+            <!-- Flagship project: x.shizuoka-connect.com -->
+            <div class="projects-modal-flagship">
+                <div class="projects-flagship-badge">
+                    <span class="flagship-pulse-dot"></span>
+                    LARGEST WEBAPP
+                </div>
+                <div class="projects-flagship-tag">FLAGSHIP PROJECT</div>
+                <h3>x.shizuoka-connect.com</h3>
+                <p>これまでに開発した中で<strong>最大規模のWebアプリケーション</strong>。しずおかコネクトのプラットフォーム上で稼働し、複数機能を統合した実運用システムとして展開中。</p>
+                <a href="https://x.shizuoka-connect.com/" target="_blank" rel="noopener" class="projects-flagship-link">
+                    <span>VIEW APP</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                        <path d="M7 17L17 7M17 7H7M17 7v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Categories breakdown -->
+            <div class="projects-modal-categories">
+                <div class="projects-category">
+                    <div class="projects-category-icon">🌐</div>
+                    <div class="projects-category-name">WEB DEVELOPMENT</div>
+                    <div class="projects-category-stat">20件</div>
+                    <div class="projects-category-desc">企業LP・ポートフォリオ・特設サイト・ECなど多様な実装案件</div>
+                </div>
+                <div class="projects-category">
+                    <div class="projects-category-icon">📱</div>
+                    <div class="projects-category-name">APP DEVELOPMENT</div>
+                    <div class="projects-category-stat">10件</div>
+                    <div class="projects-category-desc">Webアプリ・Firebase連携システムなど、要件特化の実装</div>
+                </div>
+                <div class="projects-category">
+                    <div class="projects-category-icon">🔧</div>
+                    <div class="projects-category-name">HARDWARE</div>
+                    <div class="projects-category-stat">DESIGN / DEV</div>
+                    <div class="projects-category-desc">機械工学の知見を活かした設計・試作・実装の一気通貫対応</div>
+                </div>
+            </div>
+
+            <div class="projects-modal-footer">
+                <p>個別案件のご相談は</p>
+                <a href="contact.html" class="projects-modal-cta">
+                    <span>お問い合わせフォームへ</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 12h14m0 0l-7-7m7 7l-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- Floating Business Card Button -->
     <button class="bcard-fab" id="bcardFab" aria-label="デジタル名刺を開く">

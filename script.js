@@ -672,6 +672,60 @@
 
 
 /* ============================================================
+   PROJECTS DETAIL MODAL — Open from Works card
+   ============================================================ */
+(function initProjectsModal() {
+    const trigger = document.getElementById('projectsCardBtn');
+    const modal   = document.getElementById('projectsModal');
+    if (!trigger || !modal) return;
+
+    function open() {
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+    function close() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    trigger.addEventListener('click', open);
+    modal.querySelectorAll('[data-projects-close]').forEach(el => {
+        el.addEventListener('click', close);
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) close();
+    });
+})();
+
+
+/* ============================================================
+   ARCHIVE FILTER — tabs + grid
+   ============================================================ */
+(function initArchiveFilter() {
+    const tabs  = document.querySelectorAll('.archive-tab');
+    const cards = document.querySelectorAll('.archive-card');
+    if (!tabs.length || !cards.length) return;
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const filter = tab.dataset.filter;
+            tabs.forEach(t => {
+                t.classList.toggle('active', t === tab);
+                t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+            });
+            cards.forEach(card => {
+                const status = card.dataset.status;
+                const show = filter === 'all' || filter === status;
+                card.classList.toggle('is-hidden', !show);
+            });
+        });
+    });
+})();
+
+
+/* ============================================================
    DIGITAL BUSINESS CARD — Modal, vCard, Share, QR
    ============================================================ */
 (function initBusinessCard() {
