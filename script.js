@@ -672,6 +672,80 @@
 
 
 /* ============================================================
+   HERO PRIMARY CTA — One-tap vCard download
+   ============================================================ */
+(function initHeroSaveContact() {
+    const btn = document.getElementById('heroSaveContactBtn');
+    if (!btn) return;
+
+    const SITE_URL = 'https://office-noda.shizuoka-connect.com/';
+
+    function buildVCard() {
+        return [
+            'BEGIN:VCARD',
+            'VERSION:3.0',
+            'FN:野田 悠生',
+            'N:野田;悠生;;;',
+            'X-PHONETIC-FIRST-NAME:ユウキ',
+            'X-PHONETIC-LAST-NAME:ノダ',
+            'ORG:しずおかコネクト',
+            'TITLE:代表 / Founder',
+            'ROLE:Web / App / Hardware / AI Consulting',
+            'EMAIL;TYPE=WORK:office.noda.yuki@gmail.com',
+            'EMAIL;TYPE=INTERNET:campustocommunityshizuoka@gmail.com',
+            'URL:' + SITE_URL,
+            'URL;TYPE=Organization:https://shizuoka-connect.com/',
+            'URL;TYPE=Webapp:https://x.shizuoka-connect.com/',
+            'URL;TYPE=Instagram:https://www.instagram.com/noda.yu_ki',
+            'ADR;TYPE=WORK:;;;Shizuoka;;;Japan',
+            'NOTE:静岡大学 工学部 機械工学科 / しずおかコネクト 代表',
+            'END:VCARD'
+        ].join('\r\n');
+    }
+
+    function ensureToast() {
+        let toast = document.getElementById('globalToast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'globalToast';
+            toast.className = 'global-toast';
+            document.body.appendChild(toast);
+        }
+        return toast;
+    }
+
+    function showToast(msg) {
+        const toast = ensureToast();
+        toast.innerHTML = '<span class="global-toast-check">✓</span><span>' + msg + '</span>';
+        toast.classList.add('show');
+        clearTimeout(toast._t);
+        toast._t = setTimeout(() => toast.classList.remove('show'), 2400);
+    }
+
+    btn.addEventListener('click', () => {
+        try {
+            const data = buildVCard();
+            const blob = new Blob([data], { type: 'text/vcard;charset=utf-8' });
+            const url  = URL.createObjectURL(blob);
+            const a    = document.createElement('a');
+            a.href     = url;
+            a.download = 'yuki-noda.vcf';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 1500);
+            showToast('連絡先に追加しました');
+            // Visual feedback on button
+            btn.style.transform = 'scale(0.96)';
+            setTimeout(() => { btn.style.transform = ''; }, 250);
+        } catch (e) {
+            showToast('保存に失敗しました');
+        }
+    });
+})();
+
+
+/* ============================================================
    PROJECTS DETAIL MODAL — Open from Works card
    ============================================================ */
 (function initProjectsModal() {
