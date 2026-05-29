@@ -34,6 +34,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js" defer></script>
 </head>
 
 <body>
@@ -445,12 +446,22 @@
             </h2>
             <p class="contact-sub reveal-item" style="transition-delay:0.1s">プロジェクトのご相談・お問い合わせはこちらへ</p>
 
-            <a href="contact.html" class="contact-form-cta reveal-item" style="transition-delay:0.15s">
-                <span>お問い合わせフォームを開く</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                    <path d="M7 17L17 7M17 7H7M17 7v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-            </a>
+            <div class="contact-cta-row reveal-item" style="transition-delay:0.15s">
+                <a href="contact.html" class="contact-form-cta">
+                    <span>お問い合わせフォームを開く</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path d="M7 17L17 7M17 7H7M17 7v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </a>
+                <button class="contact-form-cta contact-form-cta--ghost" id="bcardCtaBtn" type="button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="9" cy="11" r="2" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M14 10h4M14 13h4M5 16h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span>連絡先を保存 / QR表示</span>
+                </button>
+            </div>
 
             <div class="contact-emails reveal-item" style="transition-delay:0.2s">
                 <!-- Row 1: Organization -->
@@ -504,6 +515,97 @@
             <span class="footer-copy">© 2026 — All rights reserved</span>
         </div>
     </footer>
+
+    <!-- Floating Business Card Button -->
+    <button class="bcard-fab" id="bcardFab" aria-label="デジタル名刺を開く">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="9" cy="11" r="2" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M14 10h4M14 13h4M5 16h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <span class="bcard-fab-label">名刺</span>
+        <span class="bcard-fab-pulse"></span>
+    </button>
+
+    <!-- Business Card Modal -->
+    <div class="bcard-modal" id="bcardModal" aria-hidden="true">
+        <div class="bcard-modal-backdrop" data-bcard-close></div>
+        <div class="bcard-modal-content" role="dialog" aria-labelledby="bcardModalTitle">
+            <button class="bcard-modal-close" data-bcard-close aria-label="閉じる">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+            </button>
+
+            <div class="bcard-modal-label">— DIGITAL BUSINESS CARD —</div>
+
+            <div class="bcard-modal-inner">
+                <div class="bcard-modal-photo">
+                    <img src="photo-formal.jpg" alt="野田 悠生">
+                    <span class="bcard-modal-photo-ring"></span>
+                </div>
+
+                <h2 class="bcard-modal-name" id="bcardModalTitle">
+                    野田 悠生
+                    <span class="bcard-modal-name-en">Yuki Noda</span>
+                </h2>
+
+                <div class="bcard-modal-roles">
+                    <div class="bcard-modal-role">
+                        <div class="bcard-modal-role-label">UNIVERSITY</div>
+                        <div class="bcard-modal-role-name">静岡大学 工学部 機械工学科</div>
+                    </div>
+                    <div class="bcard-modal-role">
+                        <div class="bcard-modal-role-label">ORGANIZATION</div>
+                        <div class="bcard-modal-role-name">しずおかコネクト · 代表</div>
+                    </div>
+                    <div class="bcard-modal-role">
+                        <div class="bcard-modal-role-label">EXPERTISE</div>
+                        <div class="bcard-modal-role-name">Web / App / Hardware Development</div>
+                    </div>
+                </div>
+
+                <div class="bcard-modal-qr-wrap">
+                    <div class="bcard-modal-qr" id="bcardQR"></div>
+                    <div class="bcard-modal-qr-text">SCAN ME</div>
+                </div>
+
+                <div class="bcard-modal-actions">
+                    <button class="bcard-action-btn primary" id="bcardSaveBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                            <path d="M17 21v-8H7v8M7 3v5h8" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                        </svg>
+                        <span>SAVE CONTACT</span>
+                    </button>
+                    <button class="bcard-action-btn" id="bcardShareBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>SHARE</span>
+                    </button>
+                    <button class="bcard-action-btn" id="bcardCopyBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                            <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke="currentColor" stroke-width="1.6"/>
+                        </svg>
+                        <span>COPY URL</span>
+                    </button>
+                </div>
+
+                <div class="bcard-modal-emails">
+                    <a href="mailto:office.noda.yuki@gmail.com" class="bcard-modal-email-link">
+                        office.noda.yuki@gmail.com
+                    </a>
+                    <a href="https://www.instagram.com/noda.yu_ki" target="_blank" rel="noopener" class="bcard-modal-email-link">
+                        @noda.yu_ki
+                    </a>
+                </div>
+            </div>
+
+            <div class="bcard-toast" id="bcardToast"></div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

@@ -672,6 +672,165 @@
 
 
 /* ============================================================
+   DIGITAL BUSINESS CARD — Modal, vCard, Share, QR
+   ============================================================ */
+(function initBusinessCard() {
+    const fab     = document.getElementById('bcardFab');
+    const modal   = document.getElementById('bcardModal');
+    if (!modal) return;
+
+    const saveBtn  = document.getElementById('bcardSaveBtn');
+    const shareBtn = document.getElementById('bcardShareBtn');
+    const copyBtn  = document.getElementById('bcardCopyBtn');
+    const ctaBtn   = document.getElementById('bcardCtaBtn');
+    const toast    = document.getElementById('bcardToast');
+    const qrEl     = document.getElementById('bcardQR');
+
+    const SITE_URL = 'https://office-noda.shizuoka-connect.com/';
+
+    function openModal() {
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        generateQR();
+    }
+    function closeModal() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    if (fab)    fab.addEventListener('click', openModal);
+    if (ctaBtn) ctaBtn.addEventListener('click', openModal);
+
+    modal.querySelectorAll('[data-bcard-close]').forEach(el => {
+        el.addEventListener('click', closeModal);
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+
+    // ===== QR generation =====
+    let qrGenerated = false;
+    function generateQR() {
+        if (qrGenerated || !qrEl) return;
+        if (typeof qrcode === 'undefined') {
+            // Library not loaded yet — retry after a short delay
+            setTimeout(generateQR, 200);
+            return;
+        }
+        try {
+            const qr = qrcode(0, 'M');
+            qr.addData(SITE_URL);
+            qr.make();
+            qrEl.innerHTML = qr.createSvgTag({ scalable: true, cellSize: 4, margin: 1 });
+            qrGenerated = true;
+        } catch (e) {
+            console.warn('QR gen failed:', e);
+        }
+    }
+
+    // ===== Toast helper =====
+    function showToast(msg) {
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toast._t);
+        toast._t = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    // ===== vCard download =====
+    function buildVCard() {
+        return [
+            'BEGIN:VCARD',
+            'VERSION:3.0',
+            'FN:野田 悠生',
+            'N:野田;悠生;;;',
+            'X-PHONETIC-FIRST-NAME:ユウキ',
+            'X-PHONETIC-LAST-NAME:ノダ',
+            'ORG:しずおかコネクト',
+            'TITLE:代表 / Founder',
+            'ROLE:Web / App / Hardware Developer',
+            'EMAIL;TYPE=WORK:office.noda.yuki@gmail.com',
+            'EMAIL;TYPE=INTERNET:campustocommunityshizuoka@gmail.com',
+            'URL:' + SITE_URL,
+            'URL;TYPE=Organization:https://shizuoka-connect.com/',
+            'URL;TYPE=Webapp:https://x.shizuoka-connect.com/',
+            'URL;TYPE=Instagram:https://www.instagram.com/noda.yu_ki',
+            'ADR;TYPE=WORK:;;;Shizuoka;;;Japan',
+            'NOTE:静岡大学 工学部 機械工学科 / しずおかコネクト 代表',
+            'END:VCARD'
+        ].join('\r\n');
+    }
+
+    if (saveBtn) {
+        saveBtn.addEventListener('click', () => {
+            try {
+                const data = buildVCard();
+                const blob = new Blob([data], { type: 'text/vcard;charset=utf-8' });
+                const url  = URL.createObjectURL(blob);
+                const a    = document.createElement('a');
+                a.href     = url;
+                a.download = 'yuki-noda.vcf';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                setTimeout(() => URL.revokeObjectURL(url), 1000);
+                showToast('連絡先を保存しました ✓');
+            } catch (e) {
+                showToast('保存に失敗しました');
+            }
+        });
+    }
+
+    // ===== Share =====
+    if (shareBtn) {
+        shareBtn.addEventListener('click', async () => {
+            const shareData = {
+                title: 'Yuki Noda | Portfolio',
+                text:  '野田 悠生 (Yuki Noda) — しずおかコネクト 代表',
+                url:   SITE_URL
+            };
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                } catch (e) {
+                    if (e.name !== 'AbortError') showToast('シェアできませんでした');
+                }
+            } else {
+                // Fallback: copy URL
+                try {
+                    await navigator.clipboard.writeText(SITE_URL);
+                    showToast('URLをコピーしました ✓');
+                } catch (e) {
+                    showToast('シェアに対応していません');
+                }
+            }
+        });
+    }
+
+    // ===== Copy URL =====
+    if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(SITE_URL);
+                showToast('URLをコピーしました ✓');
+            } catch (e) {
+                // Fallback for older browsers
+                const ta = document.createElement('textarea');
+                ta.value = SITE_URL;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                showToast('URLをコピーしました ✓');
+            }
+        });
+    }
+})();
+
+
+/* ============================================================
    SCROLL PROGRESS BAR
    ============================================================ */
 (function initScrollProgress() {

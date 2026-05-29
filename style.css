@@ -2846,6 +2846,409 @@ footer {
 
 
 /* ============================================================
+   DIGITAL BUSINESS CARD — FAB + Modal
+   ============================================================ */
+
+/* Floating action button (always visible bottom-right) */
+.bcard-fab {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 9500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 22px 14px 18px;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(184, 240, 92, 0.45),
+                0 0 0 0 rgba(184, 240, 92, 0.5);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.4s ease, padding 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px) scale(0.85);
+    animation: bcardFabIn 0.7s 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    text-transform: uppercase;
+}
+
+@keyframes bcardFabIn {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.bcard-fab:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 12px 40px rgba(184, 240, 92, 0.6),
+                0 0 0 6px rgba(184, 240, 92, 0.18);
+}
+
+.bcard-fab-label {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: none;
+}
+
+.bcard-fab-pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 2px solid var(--accent);
+    opacity: 0;
+    animation: bcardFabPulse 2.5s ease-out infinite;
+    pointer-events: none;
+}
+
+@keyframes bcardFabPulse {
+    0%   { transform: scale(1);   opacity: 0.7; }
+    100% { transform: scale(1.4); opacity: 0; }
+}
+
+@media (max-width: 600px) {
+    .bcard-fab {
+        bottom: 18px;
+        right: 18px;
+        padding: 12px 18px;
+    }
+    .bcard-fab-label { font-size: 0.78rem; }
+}
+
+/* Modal overlay */
+.bcard-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9800;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.bcard-modal.open {
+    display: flex;
+}
+
+.bcard-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 12, 6, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    cursor: pointer;
+    animation: bcardBackdropIn 0.4s ease forwards;
+}
+
+@keyframes bcardBackdropIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.bcard-modal-content {
+    position: relative;
+    width: min(92vw, 460px);
+    max-height: 92vh;
+    overflow-y: auto;
+    background: linear-gradient(160deg, #0e1409 0%, #080c06 100%);
+    border: 1px solid rgba(184, 240, 92, 0.35);
+    border-radius: 16px;
+    padding: 50px 36px 36px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6),
+                0 0 40px rgba(184, 240, 92, 0.1);
+    animation: bcardContentIn 0.55s 0.05s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    text-align: center;
+}
+
+@keyframes bcardContentIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.94); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.bcard-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.28s ease;
+}
+
+.bcard-modal-close:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-dim);
+    transform: rotate(90deg);
+}
+
+.bcard-modal-label {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 5px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0.85;
+}
+
+.bcard-modal-photo {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 22px;
+    position: relative;
+    border-radius: 50%;
+}
+
+.bcard-modal-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 30px rgba(184, 240, 92, 0.35);
+}
+
+.bcard-modal-photo-ring {
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    border: 1px solid rgba(184, 240, 92, 0.3);
+    animation: bcardPhotoRing 2.5s ease-in-out infinite;
+}
+
+@keyframes bcardPhotoRing {
+    0%, 100% { transform: scale(1);    opacity: 0.4; }
+    50%       { transform: scale(1.08); opacity: 0.1; }
+}
+
+.bcard-modal-name {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 6px;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+}
+
+.bcard-modal-name-en {
+    display: block;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.95rem;
+    color: var(--accent);
+    margin-top: 4px;
+    letter-spacing: 1px;
+}
+
+.bcard-modal-roles {
+    margin: 24px 0 28px;
+    text-align: left;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+}
+
+.bcard-modal-role {
+    padding: 8px 0;
+}
+
+.bcard-modal-role-label {
+    font-family: var(--font-mono);
+    font-size: 0.52rem;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 3px;
+}
+
+.bcard-modal-role-name {
+    font-family: var(--font-display);
+    font-size: 0.92rem;
+    color: var(--text);
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.bcard-modal-qr-wrap {
+    margin: 0 auto 28px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    background: var(--accent-dim);
+    border-radius: 8px;
+    border: 1px solid rgba(184, 240, 92, 0.2);
+}
+
+.bcard-modal-qr {
+    width: 160px;
+    height: 160px;
+    background: #0e1409;
+    padding: 10px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bcard-modal-qr svg {
+    width: 100%;
+    height: 100%;
+}
+
+.bcard-modal-qr svg rect { fill: transparent !important; }
+.bcard-modal-qr svg path { fill: var(--accent) !important; }
+
+.bcard-modal-qr-text {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 4px;
+    color: var(--accent);
+    margin-top: 12px;
+    text-transform: uppercase;
+}
+
+.bcard-modal-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 22px;
+}
+
+@media (max-width: 420px) {
+    .bcard-modal-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+.bcard-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 13px 8px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bcard-action-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-dim);
+    transform: translateY(-2px);
+}
+
+.bcard-action-btn.primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+}
+
+.bcard-action-btn.primary:hover {
+    background: transparent;
+    color: var(--accent);
+    box-shadow: 0 0 20px rgba(184, 240, 92, 0.35);
+}
+
+.bcard-modal-emails {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+}
+
+.bcard-modal-email-link {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    word-break: break-all;
+}
+
+.bcard-modal-email-link:hover {
+    color: var(--accent);
+}
+
+/* Toast */
+.bcard-toast {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    padding: 10px 20px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    border-radius: 999px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    font-weight: 600;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+.bcard-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Contact CTA row with bcard button */
+.contact-cta-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 32px;
+    position: relative;
+    z-index: 2;
+}
+
+.contact-form-cta--ghost {
+    background: transparent !important;
+    color: var(--text) !important;
+    border-color: var(--border) !important;
+}
+
+.contact-form-cta--ghost::before {
+    background: var(--text) !important;
+}
+
+.contact-form-cta--ghost:hover {
+    color: var(--bg) !important;
+    border-color: var(--text) !important;
+}
+
+
+/* ============================================================
    FLAGSHIP CARD — Largest Project Badge
    ============================================================ */
 
