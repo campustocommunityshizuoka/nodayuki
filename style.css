@@ -1599,9 +1599,40 @@ footer {
     .profile-flip-card {
         position: static;
         transform: none;
+        margin: 50px auto 0;
+        width: 240px;
+        height: 340px;
+    }
+    .profile-flip-front {
+        gap: 22px;
+        padding: 26px 18px;
+    }
+    .profile-circle-photo,
+    .profile-illus-circle {
+        width: 168px;
+        height: 168px;
+    }
+    .profile-circle-photo img {
+        object-position: center 18%;
+    }
+    .profile-front-name {
+        font-size: 1.15rem;
+    }
+    .profile-back-name-jp {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-flip-card {
         margin: 40px auto 0;
-        width: 170px;
-        height: 250px;
+        width: 220px;
+        height: 320px;
+    }
+    .profile-circle-photo,
+    .profile-illus-circle {
+        width: 152px;
+        height: 152px;
     }
 }
 
