@@ -681,6 +681,12 @@
     const SITE_URL = 'https://office-noda.shizuoka-connect.com/';
 
     function buildVCard() {
+        const note = [
+            'しずおかコネクト 代表',
+            '一般社団法人 Grow Up Academy 理事',
+            '株式会社JOINX 学生事業部',
+            '静岡大学 工学部 機械工学科'
+        ].join(' / ');
         return [
             'BEGIN:VCARD',
             'VERSION:3.0',
@@ -690,7 +696,7 @@
             'X-PHONETIC-LAST-NAME:ノダ',
             'ORG:しずおかコネクト',
             'TITLE:代表 / Founder',
-            'ROLE:Web / App / Hardware / AI Consulting',
+            'ROLE:しずおかコネクト 代表 ; Grow Up Academy 理事 ; JOINX 学生事業部',
             'EMAIL;TYPE=WORK:office.noda.yuki@gmail.com',
             'EMAIL;TYPE=INTERNET:campustocommunityshizuoka@gmail.com',
             'URL:' + SITE_URL,
@@ -698,7 +704,7 @@
             'URL;TYPE=Webapp:https://x.shizuoka-connect.com/',
             'URL;TYPE=Instagram:https://www.instagram.com/noda.yu_ki',
             'ADR;TYPE=WORK:;;;Shizuoka;;;Japan',
-            'NOTE:静岡大学 工学部 機械工学科 / しずおかコネクト 代表',
+            'NOTE:' + note,
             'END:VCARD'
         ].join('\r\n');
     }
@@ -869,6 +875,12 @@
 
     // ===== vCard download =====
     function buildVCard() {
+        const note = [
+            'しずおかコネクト 代表',
+            '一般社団法人 Grow Up Academy 理事',
+            '株式会社JOINX 学生事業部',
+            '静岡大学 工学部 機械工学科'
+        ].join(' / ');
         return [
             'BEGIN:VCARD',
             'VERSION:3.0',
@@ -878,7 +890,7 @@
             'X-PHONETIC-LAST-NAME:ノダ',
             'ORG:しずおかコネクト',
             'TITLE:代表 / Founder',
-            'ROLE:Web / App / Hardware Developer',
+            'ROLE:しずおかコネクト 代表 ; Grow Up Academy 理事 ; JOINX 学生事業部',
             'EMAIL;TYPE=WORK:office.noda.yuki@gmail.com',
             'EMAIL;TYPE=INTERNET:campustocommunityshizuoka@gmail.com',
             'URL:' + SITE_URL,
@@ -886,7 +898,7 @@
             'URL;TYPE=Webapp:https://x.shizuoka-connect.com/',
             'URL;TYPE=Instagram:https://www.instagram.com/noda.yu_ki',
             'ADR;TYPE=WORK:;;;Shizuoka;;;Japan',
-            'NOTE:静岡大学 工学部 機械工学科 / しずおかコネクト 代表',
+            'NOTE:' + note,
             'END:VCARD'
         ].join('\r\n');
     }
