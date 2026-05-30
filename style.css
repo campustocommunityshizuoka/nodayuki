@@ -1462,8 +1462,13 @@ footer {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 25%;
+    object-position: 50% 22%;
     display: block;
+}
+
+/* Guarantee perfectly square aspect across all viewports */
+.profile-circle-photo {
+    aspect-ratio: 1 / 1;
 }
 
 .profile-front-info {
@@ -1611,9 +1616,11 @@ footer {
     .profile-illus-circle {
         width: 168px;
         height: 168px;
+        aspect-ratio: 1 / 1;
+        flex-shrink: 0;
     }
     .profile-circle-photo img {
-        object-position: center 18%;
+        object-position: 50% 18%;
     }
     .profile-front-name {
         font-size: 1.15rem;
@@ -4161,20 +4168,31 @@ footer {
 }
 
 .bcard-modal-photo {
-    width: 110px;
-    height: 110px;
+    width: 130px;
+    height: 130px;
+    aspect-ratio: 1 / 1;
     margin: 0 auto 22px;
     position: relative;
     border-radius: 50%;
+    flex-shrink: 0;
 }
 
 .bcard-modal-photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: 50% 20%;
     border-radius: 50%;
     border: 2px solid var(--accent);
     box-shadow: 0 0 30px rgba(184, 240, 92, 0.35);
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .bcard-modal-photo {
+        width: 116px;
+        height: 116px;
+    }
 }
 
 .bcard-modal-photo-ring {
