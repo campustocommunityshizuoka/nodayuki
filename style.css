@@ -4289,11 +4289,20 @@ footer {
 
 .bcard-modal-qr-text {
     font-family: var(--font-mono);
-    font-size: 0.55rem;
-    letter-spacing: 4px;
+    font-size: 0.62rem;
+    letter-spacing: 3px;
     color: var(--accent);
     margin-top: 12px;
     text-transform: uppercase;
+    font-weight: 700;
+}
+
+.bcard-modal-qr-sub {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    letter-spacing: 1px;
 }
 
 .bcard-modal-actions {

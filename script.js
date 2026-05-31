@@ -672,42 +672,11 @@
 
 
 /* ============================================================
-   HERO PRIMARY CTA — One-tap vCard download
+   HERO PRIMARY CTA — vCard direct link (static .vcf file)
    ============================================================ */
 (function initHeroSaveContact() {
     const btn = document.getElementById('heroSaveContactBtn');
     if (!btn) return;
-
-    const SITE_URL = 'https://office-noda.shizuoka-connect.com/';
-
-    function buildVCard() {
-        const note = [
-            'しずおかコネクト 代表',
-            '一般社団法人 Grow Up Academy 理事',
-            '株式会社JOINX 学生事業部',
-            '静岡大学 工学部 機械工学科'
-        ].join(' / ');
-        return [
-            'BEGIN:VCARD',
-            'VERSION:3.0',
-            'FN:野田 悠生',
-            'N:野田;悠生;;;',
-            'X-PHONETIC-FIRST-NAME:ユウキ',
-            'X-PHONETIC-LAST-NAME:ノダ',
-            'ORG:しずおかコネクト',
-            'TITLE:代表 / Founder',
-            'ROLE:しずおかコネクト 代表 ; Grow Up Academy 理事 ; JOINX 学生事業部',
-            'EMAIL;TYPE=WORK:office.noda.yuki@gmail.com',
-            'EMAIL;TYPE=INTERNET:campustocommunityshizuoka@gmail.com',
-            'URL:' + SITE_URL,
-            'URL;TYPE=Organization:https://shizuoka-connect.com/',
-            'URL;TYPE=Webapp:https://x.shizuoka-connect.com/',
-            'URL;TYPE=Instagram:https://www.instagram.com/noda.yu_ki',
-            'ADR;TYPE=WORK:;;;Shizuoka;;;Japan',
-            'NOTE:' + note,
-            'END:VCARD'
-        ].join('\r\n');
-    }
 
     function ensureToast() {
         let toast = document.getElementById('globalToast');
@@ -728,25 +697,19 @@
         toast._t = setTimeout(() => toast.classList.remove('show'), 2400);
     }
 
+    // Detect Android — show different toast message
+    const isAndroid = /Android/i.test(navigator.userAgent);
+
     btn.addEventListener('click', () => {
-        try {
-            const data = buildVCard();
-            const blob = new Blob([data], { type: 'text/vcard;charset=utf-8' });
-            const url  = URL.createObjectURL(blob);
-            const a    = document.createElement('a');
-            a.href     = url;
-            a.download = 'yuki-noda.vcf';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            setTimeout(() => URL.revokeObjectURL(url), 1500);
+        // The anchor's href + download attr handles the actual download.
+        // We only add toast feedback + visual confirmation.
+        if (isAndroid) {
+            showToast('ダウンロード → 連絡先アプリで開いてください');
+        } else {
             showToast('連絡先に追加しました');
-            // Visual feedback on button
-            btn.style.transform = 'scale(0.96)';
-            setTimeout(() => { btn.style.transform = ''; }, 250);
-        } catch (e) {
-            showToast('保存に失敗しました');
         }
+        btn.style.transform = 'scale(0.96)';
+        setTimeout(() => { btn.style.transform = ''; }, 250);
     });
 })();
 
@@ -844,23 +807,48 @@
         if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
     });
 
-    // ===== QR generation =====
+    // ===== QR generation — embed full vCard data =====
+    // QR with vCard content lets the user's camera app directly trigger
+    // "Add to Contacts" without going through the website at all.
     let qrGenerated = false;
     function generateQR() {
         if (qrGenerated || !qrEl) return;
         if (typeof qrcode === 'undefined') {
-            // Library not loaded yet — retry after a short delay
             setTimeout(generateQR, 200);
             return;
         }
         try {
+            // Use a streamlined vCard for QR (keep payload small for legibility)
+            const vcardForQR = [
+                'BEGIN:VCARD',
+                'VERSION:3.0',
+                'FN:野田 悠生',
+                'N:野田;悠生;;;',
+                'ORG:しずおかコネクト',
+                'TITLE:代表',
+                'EMAIL:office.noda.yuki@gmail.com',
+                'URL:' + SITE_URL,
+                'NOTE:しずおかコネクト 代表 / Grow Up Academy 理事 / JOINX 学生事業部',
+                'END:VCARD'
+            ].join('\r\n');
+
+            // Higher type number for vCard data (more capacity)
             const qr = qrcode(0, 'M');
-            qr.addData(SITE_URL);
+            qr.addData(vcardForQR);
             qr.make();
             qrEl.innerHTML = qr.createSvgTag({ scalable: true, cellSize: 4, margin: 1 });
             qrGenerated = true;
         } catch (e) {
-            console.warn('QR gen failed:', e);
+            // Fallback to URL-only QR if vCard payload exceeds QR capacity
+            try {
+                const qr = qrcode(0, 'M');
+                qr.addData(SITE_URL);
+                qr.make();
+                qrEl.innerHTML = qr.createSvgTag({ scalable: true, cellSize: 4, margin: 1 });
+                qrGenerated = true;
+            } catch (e2) {
+                console.warn('QR gen failed:', e2);
+            }
         }
     }
 
@@ -903,22 +891,15 @@
         ].join('\r\n');
     }
 
+    // Save button is now an anchor pointing to /yuki-noda.vcf (static file).
+    // Just add toast feedback — actual download is handled by href + download attr.
     if (saveBtn) {
+        const isAndroid = /Android/i.test(navigator.userAgent);
         saveBtn.addEventListener('click', () => {
-            try {
-                const data = buildVCard();
-                const blob = new Blob([data], { type: 'text/vcard;charset=utf-8' });
-                const url  = URL.createObjectURL(blob);
-                const a    = document.createElement('a');
-                a.href     = url;
-                a.download = 'yuki-noda.vcf';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                setTimeout(() => URL.revokeObjectURL(url), 1000);
-                showToast('連絡先を保存しました ✓');
-            } catch (e) {
-                showToast('保存に失敗しました');
+            if (isAndroid) {
+                showToast('ダウンロード → 連絡先アプリで開いてください');
+            } else {
+                showToast('連絡先に追加しました ✓');
             }
         });
     }
