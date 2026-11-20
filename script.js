@@ -824,10 +824,11 @@
                 'VERSION:3.0',
                 'FN:野田 悠生',
                 'N:野田;悠生;;;',
-                'ORG:静岡大学 工学部 機械工学科',
+                'ORG:合同会社Omusubi',
+                'TITLE:代表社員',
                 'EMAIL:office.noda.yuki@gmail.com',
                 'URL:' + SITE_URL,
-                'NOTE:Grow Up Academy 理事 / JOINX 学生事業部 / Projects: おむすび, Grow Up Studio',
+                'NOTE:合同会社Omusubi 代表社員 / Grow Up Academy 理事 / JOINX 学生事業部',
                 'END:VCARD'
             ].join('\r\n');
 
@@ -863,6 +864,7 @@
     // ===== vCard download =====
     function buildVCard() {
         const note = [
+            '合同会社Omusubi 代表社員',
             '一般社団法人 Grow Up Academy 理事',
             '株式会社JOINX 学生事業部',
             '静岡大学 工学部 機械工学科'
@@ -874,8 +876,9 @@
             'N:野田;悠生;;;',
             'X-PHONETIC-FIRST-NAME:ユウキ',
             'X-PHONETIC-LAST-NAME:ノダ',
-            'ORG:静岡大学 工学部 機械工学科',
-            'ROLE:Grow Up Academy 理事 ; JOINX 学生事業部',
+            'ORG:合同会社Omusubi',
+            'TITLE:代表社員 / Co-Founder',
+            'ROLE:合同会社Omusubi 代表社員 ; Grow Up Academy 理事 ; JOINX 学生事業部',
             'EMAIL;TYPE=WORK:office.noda.yuki@gmail.com',
             'URL:' + SITE_URL,
             'URL;TYPE=Organization:https://omusubi-machi.com/',
@@ -904,7 +907,7 @@
         shareBtn.addEventListener('click', async () => {
             const shareData = {
                 title: 'Yuki Noda | Portfolio',
-                text:  '野田 悠生 (Yuki Noda) — Portfolio',
+                text:  '野田 悠生 (Yuki Noda) — 合同会社Omusubi 代表社員',
                 url:   SITE_URL
             };
             if (navigator.share) {
