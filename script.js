@@ -783,7 +783,7 @@
     const toast    = document.getElementById('bcardToast');
     const qrEl     = document.getElementById('bcardQR');
 
-    const SITE_URL = 'https://office-noda.shizuoka-connect.com/';
+    const SITE_URL = 'https://noda.omusubi-machi.com/';
 
     function openModal() {
         modal.classList.add('open');
@@ -824,11 +824,11 @@
                 'VERSION:3.0',
                 'FN:野田 悠生',
                 'N:野田;悠生;;;',
-                'ORG:しずおかコネクト',
-                'TITLE:代表',
+                'ORG:合同会社Omusubi',
+                'TITLE:代表社員',
                 'EMAIL:office.noda.yuki@gmail.com',
                 'URL:' + SITE_URL,
-                'NOTE:しずおかコネクト 代表 / Grow Up Academy 理事 / JOINX 学生事業部',
+                'NOTE:合同会社Omusubi 代表社員 / Grow Up Academy 理事 / JOINX 学生事業部',
                 'END:VCARD'
             ].join('\r\n');
 
@@ -864,7 +864,7 @@
     // ===== vCard download =====
     function buildVCard() {
         const note = [
-            'しずおかコネクト 代表',
+            '合同会社Omusubi 代表社員',
             '一般社団法人 Grow Up Academy 理事',
             '株式会社JOINX 学生事業部',
             '静岡大学 工学部 機械工学科'
@@ -876,14 +876,12 @@
             'N:野田;悠生;;;',
             'X-PHONETIC-FIRST-NAME:ユウキ',
             'X-PHONETIC-LAST-NAME:ノダ',
-            'ORG:しずおかコネクト',
-            'TITLE:代表 / Founder',
-            'ROLE:しずおかコネクト 代表 ; Grow Up Academy 理事 ; JOINX 学生事業部',
+            'ORG:合同会社Omusubi',
+            'TITLE:代表社員 / Co-Founder',
+            'ROLE:合同会社Omusubi 代表社員 ; Grow Up Academy 理事 ; JOINX 学生事業部',
             'EMAIL;TYPE=WORK:office.noda.yuki@gmail.com',
-            'EMAIL;TYPE=INTERNET:campustocommunityshizuoka@gmail.com',
             'URL:' + SITE_URL,
-            'URL;TYPE=Organization:https://shizuoka-connect.com/',
-            'URL;TYPE=Webapp:https://x.shizuoka-connect.com/',
+            'URL;TYPE=Organization:https://omusubi-machi.com/',
             'URL;TYPE=Instagram:https://www.instagram.com/noda.yu_ki',
             'ADR;TYPE=WORK:;;;Shizuoka;;;Japan',
             'NOTE:' + note,
@@ -909,7 +907,7 @@
         shareBtn.addEventListener('click', async () => {
             const shareData = {
                 title: 'Yuki Noda | Portfolio',
-                text:  '野田 悠生 (Yuki Noda) — しずおかコネクト 代表',
+                text:  '野田 悠生 (Yuki Noda) — 合同会社Omusubi 代表社員',
                 url:   SITE_URL
             };
             if (navigator.share) {
